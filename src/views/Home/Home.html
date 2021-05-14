@@ -1,0 +1,12 @@
+
+
+<table style="border: 0;" cellpadding="0" class="itemlist">
+  <tbody>
+           
+    <% @posts.each_with_index do |post, index| %>
+      <%= render 'post_in_list', post: post, index: index%>
+    <% end %>
+  </tbody>
+</table>
+
+
