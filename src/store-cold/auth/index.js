@@ -1,17 +1,19 @@
 import axios from 'axios';
-function getToken() {
-    return localStorage.getItem('token');
+let apiKey = "113818567039641986985";
+axios.defaults.headers.common['X-API-KEY'] = apiKey;
+
+function getKey() {
+    return apiKey;
 }
-function setToken(newToken) {
-    localStorage.setItem('token', newToken);
+function setApiKey(newKey) {
+    apiKey = newKey
 }
 function clearAuthData() {
-    localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
+    delete axios.defaults.headers.common['X-API-KEY'];
 }
 
 export default {
-    getToken: getToken,
-    setToken: setToken,
+    getKey: getKey,
+    setApiKey: setApiKey,
     clearAuthData: clearAuthData,
 }

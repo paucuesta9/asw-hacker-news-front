@@ -32,13 +32,11 @@ export default {
     AppFooter
   },
   data: () => ({
-    drawer: false,
   }),
   methods: {
-    logoutFunction() {
-      AuthStore.clearAuthData();
-      this.$router.push('/');
-    }
+  },
+  mounted() {
+    console.log(AuthStore.getKey());
   }
 
 }

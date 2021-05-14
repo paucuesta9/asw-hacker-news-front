@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 // Routes
 import Home from '../views/Home/Home.vue'
-import Usuaris from '../views/Usuaris.vue'
+import Submit from '../views/Submit/Submit.vue'
 
 Vue.use(VueRouter)
 
@@ -14,9 +14,9 @@ const routes = [
     component: Home,
   },
   {
-    path: '/usuaris',
-    name: 'Usuaris',
-    component: Usuaris,
+    path: '/submit',
+    name: 'Submit',
+    component: Submit,
   },
 ]
 

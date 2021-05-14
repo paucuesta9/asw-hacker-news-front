@@ -1,0 +1,38 @@
+<div>
+  <form 
+    @submit="submitFormData"
+  >
+    <div>
+      <p>{{ error }}</p>
+    </div>
+    <!--Missatge Error-->
+    <div class="field helptitle">
+      <label for="title">Title </label>
+      <input v-model="title" type="text" id="title" name="title"><br>
+    </div>
+
+    <div class="field helpurl">
+      <label for="title">Url </label>
+      <input v-model="url" type="url" id="url" name="url"><br>
+    </div>
+
+    <div class="theor">
+      <b>or</b>
+    </div> 
+
+    <div class="field helptext">
+      <label for="text">Text </label>
+      <textarea v-model="text" id="text" name="text"></textarea>
+    </div>
+
+    <div class="actions createpost">
+      <input
+        type="submit"
+        value="Create Post"
+      >
+    </div>
+
+    <p style="padding-left:30px">Leave url blank to submit a question for discussion. If there is no url, the text (if any) will appear at the top of the thread.</p>
+
+  </form>
+</div>

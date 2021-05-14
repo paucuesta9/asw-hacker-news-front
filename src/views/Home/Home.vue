@@ -3,21 +3,20 @@
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
 
-import AppComponent from '@/components/AppComponent/AppComponent';
-
 export default {
     name: 'Home',
-    components: {
-      //AppComponent,
-    },
     data: () => ({
         posts: [],
     }),
     methods: {
         getPosts: function(){
             DataProvider("POSTS", "GET_POSTS").then((res) => {
-                
-                console.log(res);
+                let newPosts = JSON.parse(JSON.stringify(res));
+                newPosts.forEach(post => {
+                    post.voted = true;
+                    post.typePost = post.url == "" ? "ask" : "link";
+                });
+                this.posts = newPosts;
             });
             DataProvider("COMMENTS", "GET_COMMENTS", {user_id: 1}).then((res) => {
                 console.log(res);

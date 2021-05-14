@@ -3,8 +3,11 @@
 <script>
 export default {
     name: 'AppHeader',
-    data: () => ({}),
+    data: () => ({
+        logguedUser: {},
+    }),
     methods: {},
+
 }
 </script>
 
