@@ -35,11 +35,6 @@ export const PostsDataProvider = (type,params,urlAPI) => {
             }).catch((error) => {
                 console.log(error);
             });
-            break;
-
-        //case "LOGOUT":
-        //    console.log(urlAPIAuth);
-        //    break;
          
         default:
             throw new Error(`Unsupported Data Provider request type ${type}`);

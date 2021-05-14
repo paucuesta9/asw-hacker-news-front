@@ -22,9 +22,6 @@ export default {
                 console.log(res);
             })
         },
-        buildPostsData: function(postsData) {
-            console.log(postsData);
-        },
     },
     mounted() {
         this.getPosts();

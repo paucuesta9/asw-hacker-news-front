@@ -28,7 +28,7 @@ export default {
                         url: this.url,
                         text: this.text,
                     }
-                    DataProvider("POSTS", "NEW_POST", newPost).then((res) => {
+                    DataProvider("POSTS", "NEW_POST", newPost).then(() => {
                         this.$router.push({ name: "Home"})
                     }).catch((error) => {
                         this.error = error;
