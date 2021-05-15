@@ -6,6 +6,7 @@ import { DataProvider } from '@/data-providers/_Index.js';
 export default {
     name: 'Home',
     data: () => ({
+        user: localStorage.getItem('user'),
         posts: [],
     }),
     methods: {
@@ -18,9 +19,6 @@ export default {
                 });
                 this.posts = newPosts;
             });
-            DataProvider("COMMENTS", "GET_COMMENTS", {user_id: 1}).then((res) => {
-                console.log(res);
-            })
         },
     },
     mounted() {

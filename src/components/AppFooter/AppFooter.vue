@@ -3,7 +3,9 @@
 <script>
 export default {
     name: 'AppFooter',
-    data: () => ({}),
+    data: () => ({
+        user: localStorage.getItem('user'),
+    }),
     methods: {},
 }
 </script>

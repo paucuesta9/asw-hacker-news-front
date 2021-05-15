@@ -4,7 +4,7 @@
 export default {
     name: 'AppHeader',
     data: () => ({
-        logguedUser: {},
+        user: localStorage.getItem('user'),
     }),
     methods: {},
 

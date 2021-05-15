@@ -22,6 +22,21 @@ export const PostsDataProvider = (type,params,urlAPI) => {
             }).catch((error) => {
                 console.log(error);
             });
+    
+        case "GET_POST":
+            if(!!params && !!params.post_id) {
+                uri = urlAPI + '/posts/'+params.post_id;
+                options = {
+                    method: 'GET',
+                    url: uri,
+                }
+                return axios(options).then((res) => {
+                    return res.data;
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+            break;
 
         case "NEW_POST":
             uri = urlAPI + '/posts';

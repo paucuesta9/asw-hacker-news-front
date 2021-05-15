@@ -35,8 +35,8 @@ export default {
   }),
   methods: {
   },
-  mounted() {
-    console.log(AuthStore.getKey());
+  beforeMount() {
+    AuthStore.setUser();
   }
 
 }

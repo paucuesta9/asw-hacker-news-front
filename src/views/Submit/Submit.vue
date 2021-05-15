@@ -6,6 +6,7 @@ import { DataProvider } from '@/data-providers/_Index.js';
 export default {
     name: 'Submit',
     data: () => ({
+        user: localStorage.getItem('user'),
         title: "",
         url: "",
         text: "",

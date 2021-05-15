@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // Routes
 import Home from '../views/Home/Home.vue'
 import Submit from '../views/Submit/Submit.vue'
+import Post from '../views/Post/Post.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/submit',
     name: 'Submit',
     component: Submit,
+  },
+  {
+    path: '/posts/:id',
+    name: 'Post',
+    component: Post,
   },
 ]
 

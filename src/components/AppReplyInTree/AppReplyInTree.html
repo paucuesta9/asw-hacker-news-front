@@ -1,0 +1,43 @@
+<div>
+  <tr class="athing comtr">
+    <td>
+      <table style="border: 0;">
+        <tbody>
+          <tr>
+            <td class="votelinks" v-if="reply.voted" valign="top">
+              <a href="unvoteLink"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+              <span style="color: #ff6600;">*</span>
+              <img src="s.gif" width="1" height="1">
+            </td>
+            <td class="votelinks" v-if="!reply.voted" valign="top">
+              <a href="voteLink"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+            </td>
+            <td class="default">
+              <div style="margin-top:2px; margin-bottom:-10px;">
+                <span class="comhead">
+                  <a href="/userLink">{{ user.username }}</a>
+                </span>
+              </div>
+              <br>
+              <div class="comment">
+                <span class="commtext c00">{{ reply.text }}{{ reply.id }}
+                  <div class="reply">        
+                    <p>
+                      <u><a href="/replyLink">reply</a></u>
+                    </p>
+                  </div>
+                </span>
+              </div>
+            </td>          
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <div style="margin-left: 3rem;" v-for="reply in replies">
+    Here comes the replies
+    <!--<% current_comment.replies.each do |reply| %>
+      <%= render 'replies/show_in_post', current_reply: reply, num: 1 %>
+    <% end %>-->
+  </div>
+</div>

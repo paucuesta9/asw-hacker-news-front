@@ -22,9 +22,9 @@
         <td colspan="2"></td>
         <td class="subtext">
             <span class="score" :id="'score_'+post.id">{{ post.points }} Points</span> by 
-            <a :href="'/user/'+post.user_id">{{ post.user_id }}</a> 
+            <a :href="'/user/'+post.user_id">{{ user.username }}</a> 
             <span class="age">{{ post.created_at }}</span> <span :id="'unv_'+post.id"></span> | 
-            <a :href="'/posts/'+post.id+'/comments'">discuss</a>
+            <a :href="'/posts/'+post.id">discuss</a>
         </td>
       </tr>
       <tr class="spacer" style="height:5px"></tr>

@@ -1,0 +1,64 @@
+
+<div>
+  <table style="border: 0;" class="fatitem">
+    <tr class='athing'>
+      <td class="title"><span class="rank"></span></td> 
+      <td class="votelinks" v-if="post.voted" valign="top">
+        <a href="https://hacker-news-fib.herokuapp.com/"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+        <span style="color: #ff6600;">*</span>
+        <img src="s.gif" width="1" height="1">
+      </td>
+      <td class="votelinks" v-if="!post.voted" valign="top">
+        <a href="https://hacker-news-fib.herokuapp.com/"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+      </td>
+      <td class="title">
+        <a v-if="post.typePost == 'ask'" href="/postLink">{{ post.title }}</a>
+        <a v-if="post.typePost != 'ask'" :href="post.url">{{ post.title }}<span class="sitebit comhead"> (<span class="sitestr">{{ post.url }}</span>)</span></a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td class="subtext">
+        <span class="score" :id="'score_'+post.id">{{ post.points }} Points</span> by 
+        <a :href="'/user/'+post.user_id">{{ post.user_id }}</a> 
+        <span class="age">{{ post.created_at }}</span> <span :id="'unv_'+post.id"></span> | 
+        <a :href="'/posts/'+post.id+'/comments'">discuss</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td>
+        <div v-if="post.typePost == 'ask'">
+          <p>{{ post.text }}</p>
+        </div>
+        <small class="comment">
+          <form @submit="submitComment">
+            <div>
+              <p>{{ commentFormError }}</p>
+            </div>
+
+            <div class="field helptext">
+              <label for="commentFormText">Text </label>
+              <textarea v-model="commentFormText" id="commentFormText" name="commentFormText"></textarea>
+            </div>
+
+            <div class="actions createpost">
+              <input
+                type="submit"
+                value="Submit Comment"
+              >
+            </div>
+
+          </form>
+        </small>
+      </td>
+    </tr>
+  </table>
+  <table class="comment-tree" style="border: 0;">
+    <tbody>
+      <div style="margin-left: 3rem;" v-for="comment in comments">
+        <AppCommentInTree :comment="comment"></AppCommentInTree>
+      </div>
+    </tbody>
+  </table>
+</div>
