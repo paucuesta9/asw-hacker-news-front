@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home/Home.vue'
 import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
+import Ask from '../views/Ask/Ask.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/posts/:id',
     name: 'Post',
     component: Post,
+  },
+  {
+    path: '/ask',
+    name: 'Ask',
+    component: Ask,
   },
 ]
 
