@@ -1,8 +1,7 @@
 <div>
   <table class="fatitem" border="0">
     <tbody>
-      <tr class="athing" id="26886353">
-        <td class="ind"></td>
+      <tr class="athing">
         <!--
             <%if @votedcomments %>
                 <td class="votelinks" valign="top">
@@ -22,9 +21,12 @@
         <td class="default">
           <div style="margin-top:2px; margin-bottom:-10px;">
             <span class="comhead">
-              <a :href="'/user/'+comment.user_id">{{ comment.user_id }}</a>
+              <a :href="'/user/'+comment.user_id">{{ comment.user_id }} </a>
               <span class="age">{{ comment.created_at }}</span>
-              <a :href="'/posts/'+comment.post_id">{{ comment.post_id }}</a>
+              <span
+                >| on:
+                <a :href="'/posts/'+comment.post_id">{{ post.title }}</a></span
+              >
             </span>
           </div>
           <br />
@@ -56,7 +58,7 @@
               </div>
 
               <div class="actions createpost">
-                <input type="submit" value="Submit Reply" />
+                <input type="submit" value="Submit Comment" />
               </div>
             </form>
           </small>

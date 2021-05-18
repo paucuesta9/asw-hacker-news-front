@@ -2,17 +2,19 @@
 
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
-import AppCommentInTree from '@/components/AppReplyInTree/AppReplyInTree';
+import AppReplyInTree from '@/components/AppReplyInTree/AppReplyInTree';
 
 export default {
     name: 'Comment',
     components: {
-        AppCommentInTree,
+        AppReplyInTree,
     },
     data: () => ({
         user: localStorage.getItem('user'),
+        post: {},
         comment: {},
         replies: [],
+        user: {},
         replyFormError: "",
         replyFormText: "",
     }),
@@ -20,6 +22,8 @@ export default {
         getComment: function(){
             DataProvider("COMMENTS", "GET_COMMENT", {comment_id: this.$route.params.id}).then((res) => {
                 this.comment = res;
+                this.getPost();
+                this.getUser();
             })
         },
         getReplies: function(){
@@ -45,6 +49,16 @@ export default {
             else {
                 this.commentFormError = "The comment can't be empty!";
             }
+        },
+        getPost: function(){
+            DataProvider("POSTS", "GET_POST", {post_id: this.comment.post_id}).then((res) => {
+                this.post = res;
+            })
+        },
+        getUser: function(){
+            DataProvider("USERS", "GET_USER", {user_id: this.comment.user_id}).then((res) => {
+                this.user = res;
+            })
         },
     },
     beforeMount() {
