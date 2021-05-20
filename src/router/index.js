@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 // Routes
 import Home from '../views/Home/Home.vue'
@@ -7,22 +7,22 @@ import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
 import Ask from '../views/Ask/Ask.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   {
-    path: '/submit',
-    name: 'Submit',
+    path: "/submit",
+    name: "Submit",
     component: Submit,
   },
   {
-    path: '/posts/:id',
-    name: 'Post',
+    path: "/posts/:id",
+    name: "Post",
     component: Post,
   },
   {
@@ -30,12 +30,17 @@ const routes = [
     name: 'Ask',
     component: Ask,
   },
-]
+  {
+    path: "/comments/:id",
+    name: "Comment",
+    component: Comment,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

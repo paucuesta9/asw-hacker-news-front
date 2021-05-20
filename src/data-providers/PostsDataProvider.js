@@ -50,6 +50,42 @@ export const PostsDataProvider = (type,params,urlAPI) => {
             }).catch((error) => {
                 console.log(error);
             });
+            
+        case "VOTE_POST":
+            uri = urlAPI + '/posts/'+params+'/vote';
+            options = {
+                method: 'POST',
+                url: uri,
+            }
+            return axios(options).then((res) => {
+                return res.data;
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+        case "UNVOTE_POST":
+            uri = urlAPI + '/posts/'+params+'/vote';
+            options = {
+                method: 'POST',
+                url: uri,
+            }
+            return axios(options).then((res) => {
+                return res.data;
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+        case "GET_VOTED_POSTS":
+            uri = urlAPI + '/posts/upvoted';
+            options = {
+                method: 'GET',
+                url: uri,
+            }
+            return axios(options).then((res) => {
+                return res.data;
+            }).catch((error) => {
+                console.log(error);
+            });
          
         default:
             throw new Error(`Unsupported Data Provider request type ${type}`);
