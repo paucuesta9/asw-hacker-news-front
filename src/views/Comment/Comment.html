@@ -58,12 +58,19 @@
               </div>
 
               <div class="actions createpost">
-                <input type="submit" value="Submit Comment" />
+                <input type="submit" value="Submit Reply" />
               </div>
             </form>
           </small>
         </td>
       </tr>
+    </tbody>
+  </table>
+  <table class="reply-tree" style="border: 0;">
+    <tbody>
+      <div style="margin-left: 3rem;" v-for="reply in replies">
+        <AppReplyInTree :reply="reply"></AppReplyInTree>
+      </div>
     </tbody>
   </table>
 </div>

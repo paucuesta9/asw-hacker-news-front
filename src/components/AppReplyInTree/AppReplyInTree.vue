@@ -20,6 +20,7 @@ export default {
         getReplies: function(){
             DataProvider("REPLIES", "GET_REPLIES", {parent_id: this.reply.id, parent_type: "Reply" }).then((res) => {
                 console.log(res);
+                this.replies = res;
             });
         },
     },
