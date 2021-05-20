@@ -19,7 +19,7 @@ export default {
                         let found = votedPosts.find(p => p.id == post.id);
                         if(found != undefined){
                             post.voted = true;
-                            console.log("si");
+                            //console.log("si");
                         } 
                         else post.voted = false;
                         post.typePost = post.url == "" ? "ask" : "link";
