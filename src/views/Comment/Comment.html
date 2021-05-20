@@ -1,0 +1,76 @@
+<div>
+  <table class="fatitem" border="0">
+    <tbody>
+      <tr class="athing">
+        <!--
+            <%if @votedcomments %>
+                <td class="votelinks" valign="top">
+                <%= link_to :controller => "vote_comments", :action => "unvote", :id => @comment.id do %>
+                    <center><font color="#ff6600">*</font>
+                    <img src="s.gif" width="1" height="1"></center>    
+                <% end %>
+                </td>
+            <% else %>
+                <td valign="top" class="votelinks"><center>
+                <%= link_to :controller => "vote_comments", :action => "upvote", :id => @comment.id do %>
+                    <div class="votearrow" title="upvote"></div>
+                <% end %>
+                </center></td>
+            <%end%>
+            -->
+        <td class="default">
+          <div style="margin-top:2px; margin-bottom:-10px;">
+            <span class="comhead">
+              <a :href="'/user/'+comment.user_id">{{ comment.user_id }} </a>
+              <span class="age">{{ comment.created_at }}</span>
+              <span
+                >| on:
+                <a :href="'/posts/'+comment.post_id">{{ post.title }}</a></span
+              >
+            </span>
+          </div>
+          <br />
+          <div class="comment">
+            <span class="commtext c00"
+              >{{ comment.text }}
+              <div class="reply"></div
+            ></span>
+          </div>
+        </td>
+      </tr>
+      <tr style="height:10px"></tr>
+      <tr>
+        <td colspan="2"></td>
+        <td>
+          <small class="comment">
+            <form @submit="submitReply">
+              <div>
+                <p>{{ replyFormError }}</p>
+              </div>
+
+              <div class="field helptext">
+                <label for="replyFormText">Text </label>
+                <textarea
+                  v-model="replyFormText"
+                  id="replyFormText"
+                  name="replyFormText"
+                ></textarea>
+              </div>
+
+              <div class="actions createpost">
+                <input type="submit" value="Submit Reply" />
+              </div>
+            </form>
+          </small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="reply-tree" style="border: 0;">
+    <tbody>
+      <div style="margin-left: 3rem;" v-for="reply in replies">
+        <AppReplyInTree :reply="reply"></AppReplyInTree>
+      </div>
+    </tbody>
+  </table>
+</div>

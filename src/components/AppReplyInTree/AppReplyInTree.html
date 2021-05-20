@@ -5,39 +5,45 @@
         <tbody>
           <tr>
             <td class="votelinks" v-if="reply.voted" valign="top">
-              <a href="unvoteLink"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+              <a href="unvoteLink"
+                ><img src="@/assets/images/grayarrow.gif" width="10" height="10"
+              /></a>
               <span style="color: #ff6600;">*</span>
-              <img src="s.gif" width="1" height="1">
+              <img src="s.gif" width="1" height="1" />
             </td>
             <td class="votelinks" v-if="!reply.voted" valign="top">
-              <a href="voteLink"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+              <a href="voteLink"
+                ><img src="@/assets/images/grayarrow.gif" width="10" height="10"
+              /></a>
             </td>
             <td class="default">
               <div style="margin-top:2px; margin-bottom:-10px;">
                 <span class="comhead">
-                  <a href="/userLink">{{ user.username }}</a>
+                  <a href="/userLink">{{ reply.user_id }}</a>
                 </span>
               </div>
-              <br>
+              <br />
               <div class="comment">
-                <span class="commtext c00">{{ reply.text }}{{ reply.id }}
-                  <div class="reply">        
+                <span class="commtext c00"
+                  >{{ reply.text }}
+                  <div class="reply">
                     <p>
-                      <u><a href="/replyLink">reply</a></u>
+                      <u><a :href="'/replies/'+reply.id">reply</a></u>
                     </p>
                   </div>
                 </span>
               </div>
-            </td>          
+            </td>
           </tr>
+        </tbody>
+      </table>
+      <table class="reply-tree" style="border: 0;">
+        <tbody>
+          <div style="margin-left: 3rem;" v-for="reply in replies">
+            <AppReplyInTree :reply="reply"></AppReplyInTree>
+          </div>
         </tbody>
       </table>
     </td>
   </tr>
-  <div style="margin-left: 3rem;" v-for="reply in replies">
-    Here comes the replies
-    <!--<% current_comment.replies.each do |reply| %>
-      <%= render 'replies/show_in_post', current_reply: reply, num: 1 %>
-    <% end %>-->
-  </div>
 </div>
