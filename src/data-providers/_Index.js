@@ -1,6 +1,7 @@
 import {PostsDataProvider} from './PostsDataProvider';
 import {CommentsDataProvider} from './CommentsDataProvider';
 import {RepliesDataProvider} from './RepliesDataProvider';
+import {UsersDataProvider} from './UsersDataProvider';
 
 const urlAPI = "https://hacker-news-fib.herokuapp.com/api/v1"
 
@@ -18,10 +19,10 @@ export const DataProvider = (providerType, type, params) => {
 //            data = VotesDataProvider(type,params,urlAPI);
 //            break;
 //
-//        case "USERS":
-//            data = AuthDataProvider(type,params,urlAPI);
-//            break;
-//
+        case "USERS":
+            data = UsersDataProvider(type,params,urlAPI);
+            break;
+
         case "COMMENTS":
             data = CommentsDataProvider(type,params,urlAPI);
             break;
