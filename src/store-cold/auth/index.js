@@ -11,7 +11,7 @@ function setUser() {
     // TODO Call to retrieve user from api
     let mockUser = {
         username: "Joan Vilarrasa",
-        user_id: 1,
+        user_id: 2,
     }
     localStorage.setItem('user', mockUser);
     return localStorage.getItem('user');

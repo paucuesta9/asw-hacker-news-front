@@ -1,4 +1,7 @@
 module.exports = {
   transpileDependencies: [],
-  runtimeCompiler: true 
+  runtimeCompiler: true ,
+  devServer: {
+    disableHostCheck: true
+  },
 }
