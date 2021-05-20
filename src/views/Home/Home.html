@@ -6,12 +6,12 @@
           <span class="rank">{{ index }}.</span>
         </td>
         <td class="votelinks" v-if="post.voted" valign="top">
-          <a href="https://hacker-news-fib.herokuapp.com/"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+          <span v-on:click="unvotePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
           <span style="color: #ff6600;">*</span>
           <img src="s.gif" width="1" height="1">
         </td>
         <td class="votelinks" v-if="!post.voted" valign="top">
-          <a href="https://hacker-news-fib.herokuapp.com/"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+          <span v-on:click="votePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
         </td>
         <td class="title">
           <a v-if="post.typePost == 'ask'" href="/postLink">{{ post.title }}</a>
