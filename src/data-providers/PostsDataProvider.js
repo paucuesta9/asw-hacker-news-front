@@ -66,7 +66,7 @@ export const PostsDataProvider = (type,params,urlAPI) => {
         case "UNVOTE_POST":
             uri = urlAPI + '/posts/'+params+'/vote';
             options = {
-                method: 'POST',
+                method: 'DELETE',
                 url: uri,
             }
             return axios(options).then((res) => {

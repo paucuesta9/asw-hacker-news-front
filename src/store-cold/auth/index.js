@@ -7,17 +7,13 @@ axios.defaults.headers.common['X-API-KEY'] = apiKey;
 function getKey() {
     return apiKey;
 }
-function setUser() {
-    // TODO Call to retrieve user from api
-    let mockUser = {
-        username: "Joan Vilarrasa",
-        user_id: 2,
-    }
-    localStorage.setItem('user', mockUser);
-    return localStorage.getItem('user');
+async function setUser() {
+    let user = await DataProvider("USERS", "GET_USER", 2).then((res) => {return res});
+    localStorage.setItem('user', JSON.stringify(user));
+    return JSON.parse(localStorage.getItem('user'));
 }
 function getUser() {
-    return localStorage.getItem('user');
+    return JSON.parse(localStorage.getItem('user'));
 }
 function setApiKey(newKey) {
     // Call and set new user

@@ -2,41 +2,37 @@
 
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
+import { getTimeSince } from './helper.js';
 
 export default {
     name: 'Home',
     data: () => ({
-        user: localStorage.getItem('user'),
+        user: JSON.parse(localStorage.getItem('user')),
         posts: [],
     }),
     methods: {
-        getPosts: function(){
-            DataProvider("POSTS", "GET_POSTS").then((res) => {
-                let newPosts = JSON.parse(JSON.stringify(res));
-                DataProvider("POSTS", "GET_POSTS").then((result) => {
-                    let votedPosts = JSON.parse(JSON.stringify(result));
-                    newPosts.forEach(post => {
-                        let found = votedPosts.find(p => p.id == post.id);
-                        if(found != undefined){
-                            post.voted = true;
-                            //console.log("si");
-                        } 
-                        else post.voted = false;
-                        post.typePost = post.url == "" ? "ask" : "link";
-                    });
-                    console.log(votedPosts);
-                });
-                this.posts = newPosts;
-            });
+        getPosts: async function(){
+            let newPosts = await DataProvider("POSTS", "GET_POSTS").then((res) => {return res});
+            let votedPosts = await DataProvider("POSTS", "GET_VOTED_POSTS").then((res) => {return res});
+
+            await Promise.all(newPosts.map(async (post) => {
+                post.voted = votedPosts.find(p => p.id == post.id) != undefined ? true : false;
+                post.typePost = post.url == "" ? "ask" : "link";
+                post.time_elapsed = getTimeSince(post.created_at)
+                post.user_username = await DataProvider("USERS", "GET_USER", post.user_id).then((res) => {return res.username});
+                post.num_comments = await DataProvider("COMMENTS", "GET_COMMENTS", {post_id: post.id}).then((res) => {return res.length});
+            }));
+            newPosts.sort(function(a, b) { return b.points - a.points; })
+            this.posts = newPosts;
         },
         votePost: function(post){
             DataProvider("POSTS", "VOTE_POST", post.id).then((res) => {
-              console.log(res);  
+              this.getPosts();
             });
         },
         unvotePost: function(post){
-            DataProvider("POSTS", " UNVOTE_POST", post.id).then((res) => {
-              console.log(res);  
+            DataProvider("POSTS", "UNVOTE_POST", post.id).then((res) => {
+              this.getPosts();
             });
         },
     },
@@ -47,3 +43,8 @@ export default {
 </script>
 
 <style lang="scss" src="./Home.scss"></style>
+
+for (const file of files) {
+    const contents = await fs.readFile(file, 'utf8');
+    console.log(contents);
+  }
