@@ -15,10 +15,6 @@ export const DataProvider = (providerType, type, params) => {
             data = PostsDataProvider(type,params,urlAPI);
             break;
         
-//        case "VOTES":
-//            data = VotesDataProvider(type,params,urlAPI);
-//            break;
-//
         case "USERS":
             data = UsersDataProvider(type,params,urlAPI);
             break;
