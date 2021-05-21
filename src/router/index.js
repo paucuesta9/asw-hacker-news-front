@@ -6,6 +6,7 @@ import Home from '../views/Home/Home.vue'
 import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
 import Ask from '../views/Ask/Ask.vue'
+import User from '../views/User/User.vue'
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
     path: "/comments/:id",
     name: "Comment",
     component: Comment,
+  },
+  {
+    path: "/users",
+    name: "User",
+    component: User,
   },
 ];
 
