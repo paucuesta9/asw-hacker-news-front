@@ -13,11 +13,11 @@
         <td class="default">
           <div style="margin-top:2px; margin-bottom:-10px;">
             <span class="comhead">
-              <a :href="'/user/'+reply.user_id">{{ reply.user_id }} </a>
-              <span class="age">{{ reply.created_at }}</span>
+              <a :href="'/user/'+reply.user_id">{{ reply.user_username }} </a>
+              <span class="age">{{ reply.time_elapsed }}</span>
               <span
                 >| on:
-                <a :href="'/posts/'+reply.post_id">{{ post.title }}</a></span
+                <a :href="'/posts/'+reply.post_id">{{ reply.post_title }}</a></span
               >
             </span>
           </div>
@@ -32,7 +32,7 @@
       </tr>
       <tr style="height:10px"></tr>
       <tr>
-        <td colspan="2"></td>
+        <td colspan="1"></td>
         <td>
           <small class="reply">
             <form @submit="submitReply">
@@ -41,7 +41,6 @@
               </div>
 
               <div class="field helptext">
-                <label for="replyFormText">Text </label>
                 <textarea
                   v-model="replyFormText"
                   id="replyFormText"
@@ -49,7 +48,7 @@
                 ></textarea>
               </div>
 
-              <div class="actions createpost">
+              <div class="actions">
                 <input type="submit" value="Submit Reply" />
               </div>
             </form>

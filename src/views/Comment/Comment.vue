@@ -12,10 +12,8 @@ export default {
     },
     data: () => ({
         user: localStorage.getItem('user'),
-        post: {},
         comment: {},
         replies: [],
-        user: {},
         replyFormError: "",
         replyFormText: "",
     }),

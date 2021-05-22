@@ -3,6 +3,7 @@
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
 import AppReplyInTree from '@/components/AppReplyInTree/AppReplyInTree';
+import { getTimeSince } from '@/helpers/index.js';
 
 export default {
     name: 'Reply',
@@ -11,25 +12,24 @@ export default {
     },
     data: () => ({
         user: localStorage.getItem('user'),
-        post: {},
         reply: {},
         replies: [],
-        user: {},
         replyFormError: "",
         replyFormText: "",
     }),
     methods: {
-        getReply: function(){
-            DataProvider("REPLIES", "GET_REPLY", {reply_id: this.$route.params.id}).then((res) => {
-                this.reply = res;
-                this.getPost();
-                this.getUser();
-            })
-        },
-        getReplies: function(){
-            DataProvider("REPLIES", "GET_REPLIES", {parent_id: this.$route.params.id, parent_type: "Reply"}).then((res) => {
+        getReply: async function(){
+            let newReply = await DataProvider("REPLIES", "GET_REPLY", {reply_id: this.$route.params.id}).then((res) => {return res});
+            let votedReplies = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
+            newReply.voted = votedReplies.find(c => c.id == newReply.id) != undefined ? true : false;
+            newReply.time_elapsed = getTimeSince(newReply.created_at);
+            newReply.user_username = await DataProvider("USERS", "GET_USER", newReply.user_id).then((res) => {return res.username});
+            newReply.num_replies = await DataProvider("REPLIES", "GET_REPLIES", {parent_id: newReply.id, parent_type: "Reply"}).then((res) => {
                 this.replies = res;
-            })
+                return res.length;
+            });
+            //newReply.post_title = await DataProvider("POSTS", "GET_POST", {post_id: newReply.post_id}).then((res) => {return res.title});
+            this.reply = newReply;
         },
         submitReply: function(e){
             e.preventDefault();
@@ -38,7 +38,7 @@ export default {
                 let newReply = {
                    text: this.commentFormText,
                    parent_id: this.$route.params.id,
-                   parent_type: "Reply",
+                   parent_type: "Comment",
                 }
                 DataProvider("REPLIES", "NEW_REPLY", newPost).then(() => {
                    this.$router.push({ name: "Home"})
@@ -47,23 +47,12 @@ export default {
                 });
             }
             else {
-                this.commentFormError = "The reply can't be empty!";
+                this.commentFormError = "The comment can't be empty!";
             }
-        },
-        getPost: function(){
-            DataProvider("POSTS", "GET_POST", {post_id: this.comment.post_id}).then((res) => {
-                this.post = res;
-            })
-        },
-        getUser: function(){
-            DataProvider("USERS", "GET_USER", {user_id: this.reply.user_id}).then((res) => {
-                this.user = res;
-            })
         },
     },
     beforeMount() {
         this.getReply();
-        this.getReplies();
     }
 }
 </script>
