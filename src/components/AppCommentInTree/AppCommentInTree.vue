@@ -23,7 +23,7 @@ export default {
         getReplies: async function(){
             let newComment = JSON.parse(JSON.stringify(this.commentObj));
             let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
-            newComment.voted = votedComments.find(c => c.id == newComment.id) != undefined ? true : false;
+            newComment.voted = votedComments.find(c => c.id == newComment.id && c.post_id != undefined) != undefined ? true : false;
             newComment.time_elapsed = getTimeSince(newComment.created_at);
             newComment.user_username = await DataProvider("USERS", "GET_USER", newComment.user_id).then((res) => {return res.username});
             DataProvider("REPLIES", "GET_REPLIES", {parent_id: newComment.id, parent_type: "Comment" }).then((res) => {

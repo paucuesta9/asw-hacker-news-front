@@ -24,8 +24,44 @@ export const RepliesDataProvider = (type, params, urlAPI) => {
         .catch((error) => {
           console.log(error);
         });
+    
+    case "GET_REPLY":
+      if (!!params && !!params.reply_id) {
+        uri = urlAPI + "/replies/" + params.reply_id;
+        options = {
+          method: "GET",
+          url: uri,
+        };
+        return axios(options)
+          .then((res) => {
+            return res.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      break;
 
-    case "NEW_POST":
+      case "GET_POST":
+        if (!!params && !!params.reply_id) {
+          uri = urlAPI + "/posts";
+          url = new URL(uri);
+          url.searchParams.append("reply_id", params.reply_id);
+          options = {
+            method: "GET",
+            url: url.toString(),
+          };
+          return axios(options)
+            .then((res) => {
+              return res.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        break;
+
+    case "NEW_REPLY":
       uri = urlAPI + "/replies";
       options = {
         method: "POST",
