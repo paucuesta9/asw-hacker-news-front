@@ -21,7 +21,7 @@ export default {
         getComment: async function(){
             let newComment = await DataProvider("COMMENTS", "GET_COMMENT", {comment_id: this.$route.params.id}).then((res) => {return res});
             let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
-            newComment.voted = votedComments.find(c => c.id == newComment.id) != undefined ? true : false;
+            newComment.voted = votedComments.find(c => c.id == newComment.id && c.post_id != undefined) != undefined ? true : false;
             newComment.time_elapsed = getTimeSince(newComment.created_at);
             newComment.user_username = await DataProvider("USERS", "GET_USER", newComment.user_id).then((res) => {return res.username});
             newComment.num_replies = await DataProvider("REPLIES", "GET_REPLIES", {parent_id: newComment.id, parent_type: "Comment"}).then((res) => {

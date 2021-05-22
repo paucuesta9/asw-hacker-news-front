@@ -22,7 +22,7 @@ export default {
         getReply: async function(){
             let newReply = await DataProvider("REPLIES", "GET_REPLY", {reply_id: this.$route.params.id}).then((res) => {return res});
             let votedReplies = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
-            newReply.voted = votedReplies.find(c => c.id == newReply.id) != undefined ? true : false;
+            newReply.voted = votedReplies.find(c => c.id == newReply.id && c.parent_id != undefined) != undefined ? true : false;
             newReply.time_elapsed = getTimeSince(newReply.created_at);
             newReply.user_username = await DataProvider("USERS", "GET_USER", newReply.user_id).then((res) => {return res.username});
             newReply.num_replies = await DataProvider("REPLIES", "GET_REPLIES", {parent_id: this.$route.params.id, parent_type: "Reply"}).then((res) => {
