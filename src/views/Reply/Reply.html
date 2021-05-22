@@ -17,7 +17,7 @@
               <span class="age">{{ reply.time_elapsed }}</span>
               <span
                 >| on:
-                <a :href="'/posts/'+reply.post_id">{{ reply.post_title }}</a></span
+                <a :href="'/posts/'+post.id">{{ post.title }}</a></span
               >
             </span>
           </div>
@@ -60,7 +60,7 @@
   <table class="reply-tree" style="border: 0;">
     <tbody>
       <div style="margin-left: 3rem;" v-for="reply in replies">
-        <AppReplyInTree :reply="reply"></AppReplyInTree>
+        <AppReplyInTree :replyObj="reply"></AppReplyInTree>
       </div>
     </tbody>
   </table>

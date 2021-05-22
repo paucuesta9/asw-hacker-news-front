@@ -14,6 +14,7 @@ export default {
         user: localStorage.getItem('user'),
         reply: {},
         replies: [],
+        post: {},
         replyFormError: "",
         replyFormText: "",
     }),
@@ -24,11 +25,11 @@ export default {
             newReply.voted = votedReplies.find(c => c.id == newReply.id) != undefined ? true : false;
             newReply.time_elapsed = getTimeSince(newReply.created_at);
             newReply.user_username = await DataProvider("USERS", "GET_USER", newReply.user_id).then((res) => {return res.username});
-            newReply.num_replies = await DataProvider("REPLIES", "GET_REPLIES", {parent_id: newReply.id, parent_type: "Reply"}).then((res) => {
+            newReply.num_replies = await DataProvider("REPLIES", "GET_REPLIES", {parent_id: this.$route.params.id, parent_type: "Reply"}).then((res) => {
                 this.replies = res;
                 return res.length;
             });
-            //newReply.post_title = await DataProvider("POSTS", "GET_POST", {post_id: newReply.post_id}).then((res) => {return res.title});
+            this.post = await DataProvider("REPLIES", "GET_POST", {reply_id: this.$route.params.id}).then((res) => {return res});
             this.reply = newReply;
         },
         submitReply: function(e){
@@ -36,9 +37,9 @@ export default {
             if(this.replyFormText != "") {
                 this.replyFormError = "";
                 let newReply = {
-                   text: this.commentFormText,
+                   text: this.replyFormText,
                    parent_id: this.$route.params.id,
-                   parent_type: "Comment",
+                   parent_type: "Reply",
                 }
                 DataProvider("REPLIES", "NEW_REPLY", newPost).then(() => {
                    this.$router.push({ name: "Home"})
@@ -47,7 +48,7 @@ export default {
                 });
             }
             else {
-                this.commentFormError = "The comment can't be empty!";
+                this.commentFormError = "The reply can't be empty!";
             }
         },
     },
