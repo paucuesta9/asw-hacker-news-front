@@ -6,7 +6,7 @@
           <span class="rank">{{ index }}.</span>
         </td>
         <td class="votelinks" v-if="post.voted == true">
-          <span v-on:click="unvotePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
+          <span v-on:click="unvotePost(post)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
           <span style="color: #ff6600;">*</span>
           <img src="s.gif" width="1" height="1">
         </td>

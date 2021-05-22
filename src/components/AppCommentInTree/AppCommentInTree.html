@@ -4,26 +4,27 @@
       <table style="border: 0;">
         <tbody>
           <tr>
-            <td class="votelinks" v-if="comment.voted" valign="top">
-              <a href="unvoteLink"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+            <td class="votelinks" v-if="comment.voted == true" valign="top">
+              <span v-on:click="unvoteComment(comment)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
               <span style="color: #ff6600;">*</span>
               <img src="s.gif" width="1" height="1">
             </td>
-            <td class="votelinks" v-if="!comment.voted" valign="top">
-              <a href="voteLink"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></a>
+            <td class="votelinks" v-if="comment.voted != true" valign="top">
+              <span v-on:click="voteComment(comment)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
             </td>
             <td class="default">
               <div style="margin-top:2px; margin-bottom:-10px;">
                 <span class="comhead">
-                  <a href="/userLink">{{ user.username }}</a>
+                  <a style="margin-right: 0.3rem;" :href="'/users/'+comment.user_id">{{ comment.user_username }}</a>
+                  <a :href="'/comments/'+comment.id">{{ comment.time_elapsed }}</a>
                 </span>
               </div>
               <br>
               <div class="comment">
-                <span class="commtext c00">{{ comment.text }}{{ comment.id }}
+                <span class="commtext c00">{{ comment.text }}
                   <div class="reply">        
                     <p>
-                      <u><a href="/commentLink">reply</a></u>
+                      <u><a :href="'/comments/'+comment.id">reply</a></u>
                     </p>
                   </div>
                 </span>
@@ -35,6 +36,6 @@
     </td>
   </tr>
   <div style="margin-left: 3rem;" v-for="reply in replies">
-    <AppReplyInTree :reply="reply"></AppReplyInTree>
+    <AppReplyInTree :replyObj="reply"></AppReplyInTree>
   </div>
 </div>

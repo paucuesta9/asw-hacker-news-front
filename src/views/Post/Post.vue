@@ -25,7 +25,7 @@ export default {
             let votedPosts = await DataProvider("POSTS", "GET_VOTED_POSTS").then((res) => {return res});
             newPost.voted = votedPosts.find(p => p.id == newPost.id) != undefined ? true : false;
             newPost.typePost = newPost.url == "" ? "ask" : "link";
-            newPost.time_elapsed = getTimeSince(newPost.created_at)
+            newPost.time_elapsed = getTimeSince(newPost.created_at);
             newPost.user_username = await DataProvider("USERS", "GET_USER", newPost.user_id).then((res) => {return res.username});
             newPost.num_comments = await DataProvider("COMMENTS", "GET_COMMENTS", {post_id: newPost.id}).then((res) => {return res.length});
             this.post = newPost;

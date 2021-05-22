@@ -7,6 +7,5 @@ export function getTimeSince(sinceTimeString) {
     let hoursElapsed = parseInt(msElapsed / (1000*60*60));
     if(hoursElapsed > 0) return hoursElapsed + " hour"+ (hoursElapsed!=1 ? "s" : "") +" ago";
     let minElapsed = parseInt(msElapsed / (1000*60));
-    if(minElapsed > 0) return minElapsed + " minute"+ (minElapsed!=1 ? "s" : "") +" ago";
-    return "less than 1 minute ago";
+    return minElapsed + " minute"+ (minElapsed!=1 ? "s" : "") +" ago";
 }

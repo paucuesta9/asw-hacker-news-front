@@ -39,6 +39,30 @@ export const RepliesDataProvider = (type, params, urlAPI) => {
         .catch((error) => {
           console.log(error);
         });
+      
+    case "VOTE_REPLY":
+      uri = urlAPI + '/replies/'+params+'/vote';
+      options = {
+          method: 'POST',
+          url: uri,
+      }
+      return axios(options).then((res) => {
+          return res.data;
+      }).catch((error) => {
+          console.log(error);
+      });
+
+    case "UNVOTE_REPLY":
+      uri = urlAPI + '/replies/'+params+'/vote';
+      options = {
+          method: 'DELETE',
+          url: uri,
+      }
+      return axios(options).then((res) => {
+          return res.data;
+      }).catch((error) => {
+          console.log(error);
+      });
 
     default:
       throw new Error(`Unsupported Data Provider request type ${type}`);
