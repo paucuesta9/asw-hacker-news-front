@@ -2,44 +2,46 @@
   <table class="fatitem" border="0">
     <tbody>
       <tr class="athing">
-        <td class="votelinks" v-if="comment.voted == true" valign="top">
-          <span v-on:click="unvoteComment(comment)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"/></span>
+        <td class="votelinks" v-if="reply.voted == true" valign="top">
+          <span v-on:click="unvoteReply(reply)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"/></span>
           <span style="color: #ff6600;">*</span>
           <img src="s.gif" width="1" height="1" />
         </td>
-        <td class="votelinks" v-if="comment.voted != true" valign="top">
-          <span v-on:click="voteComment(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"/></span>
+        <td class="votelinks" v-if="reply.voted != true" valign="top">
+          <span v-on:click="voteReply(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"/></span>
         </td>
         <td class="default">
           <div style="margin-top:2px; margin-bottom:-10px;">
             <span class="comhead">
-              <a :href="'/user/'+comment.user_id">{{ comment.user_username }} </a>
-              <span class="age">{{ comment.time_elapsed }}</span>
+              <a :href="'/user/'+reply.user_id">{{ reply.user_id }} </a>
+              <span class="age">{{ reply.created_at }}</span>
               <span
                 >| on:
-                <a :href="'/posts/'+comment.post_id">{{ comment.post_title }}</a></span
+                <a :href="'/posts/'+reply.post_id">{{ post.title }}</a></span
               >
             </span>
           </div>
           <br />
-          <div class="comment">
+          <div class="reply">
             <span class="commtext c00"
-              >{{ comment.text }}
+              >{{ reply.text }}
               <div class="reply"></div
             ></span>
           </div>
         </td>
       </tr>
+      <tr style="height:10px"></tr>
       <tr>
-        <td colspan="1"></td>
+        <td colspan="2"></td>
         <td>
-          <small class="comment">
+          <small class="reply">
             <form @submit="submitReply">
               <div>
                 <p>{{ replyFormError }}</p>
               </div>
 
               <div class="field helptext">
+                <label for="replyFormText">Text </label>
                 <textarea
                   v-model="replyFormText"
                   id="replyFormText"
@@ -47,7 +49,7 @@
                 ></textarea>
               </div>
 
-              <div class="actions">
+              <div class="actions createpost">
                 <input type="submit" value="Submit Reply" />
               </div>
             </form>

@@ -3,6 +3,7 @@
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
 import AppReplyInTree from '@/components/AppReplyInTree/AppReplyInTree';
+import { getTimeSince } from '@/helpers/index.js';
 
 export default {
     name: 'Comment',
@@ -19,17 +20,18 @@ export default {
         replyFormText: "",
     }),
     methods: {
-        getComment: function(){
-            DataProvider("COMMENTS", "GET_COMMENT", {comment_id: this.$route.params.id}).then((res) => {
-                this.comment = res;
-                this.getPost();
-                this.getUser();
-            })
-        },
-        getReplies: function(){
-            DataProvider("REPLIES", "GET_REPLIES", {parent_id: this.$route.params.id, parent_type: "Comment"}).then((res) => {
+        getComment: async function(){
+            let newComment = await DataProvider("COMMENTS", "GET_COMMENT", {comment_id: this.$route.params.id}).then((res) => {return res});
+            let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
+            newComment.voted = votedComments.find(c => c.id == newComment.id) != undefined ? true : false;
+            newComment.time_elapsed = getTimeSince(newComment.created_at);
+            newComment.user_username = await DataProvider("USERS", "GET_USER", newComment.user_id).then((res) => {return res.username});
+            newComment.num_replies = await DataProvider("REPLIES", "GET_REPLIES", {parent_id: newComment.id, parent_type: "Comment"}).then((res) => {
                 this.replies = res;
-            })
+                return res.length;
+            });
+            newComment.post_title = await DataProvider("POSTS", "GET_POST", {post_id: newComment.post_id}).then((res) => {return res.title});
+            this.comment = newComment;
         },
         submitReply: function(e){
             e.preventDefault();
@@ -50,20 +52,9 @@ export default {
                 this.commentFormError = "The comment can't be empty!";
             }
         },
-        getPost: function(){
-            DataProvider("POSTS", "GET_POST", {post_id: this.comment.post_id}).then((res) => {
-                this.post = res;
-            })
-        },
-        getUser: function(){
-            DataProvider("USERS", "GET_USER", {user_id: this.comment.user_id}).then((res) => {
-                this.user = res;
-            })
-        },
     },
     beforeMount() {
         this.getComment();
-        this.getReplies();
     }
 }
 </script>
