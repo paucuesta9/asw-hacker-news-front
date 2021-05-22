@@ -22,7 +22,7 @@
         <td colspan="2"></td>
         <td class="subtext">
             <span class="score" :id="'score_'+post.id">{{ post.points }} Point<span v-if="post.points != 1">s</span></span> by 
-            <a :href="'/user/'+post.user_id">{{ post.user_username }}</a> <span style="margin-right: 0.2rem;"></span>
+            <a :href="'/users/'+post.user_id">{{ post.user_username }}</a> <span style="margin-right: 0.2rem;"></span>
             <span class="age">{{ post.time_elapsed }}</span> <span :id="'unv_'+post.id"></span> | 
             <a :href="'/posts/'+post.id"><span v-if="post.num_comments == 0">discuss</span><span v-if="post.num_comments != 0">{{ post.num_comments }} comment<span v-if="post.num_comments != 1">s</span></span></a>
         </td>

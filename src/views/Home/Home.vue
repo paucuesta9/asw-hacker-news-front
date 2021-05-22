@@ -2,7 +2,7 @@
 
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
-import { getTimeSince } from './helper.js';
+import { getTimeSince } from '@/helpers/index.js';
 
 export default {
     name: 'Home',

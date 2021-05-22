@@ -2,39 +2,27 @@
   <table style="border: 0;" class="fatitem">
     <tr class="athing">
       <td class="title"><span class="rank"></span></td>
-      <td class="votelinks" v-if="post.voted" valign="top">
-        <a href="https://hacker-news-fib.herokuapp.com/"
-          ><img src="@/assets/images/grayarrow.gif" width="10" height="10"
-        /></a>
+      <td class="votelinks" v-if="post.voted == true" valign="top">
+        <span v-on:click="unvotePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"/></span>
         <span style="color: #ff6600;">*</span>
         <img src="s.gif" width="1" height="1" />
       </td>
-      <td class="votelinks" v-if="!post.voted" valign="top">
-        <a href="https://hacker-news-fib.herokuapp.com/"
-          ><img src="@/assets/images/grayarrow.gif" width="10" height="10"
-        /></a>
+      <td class="votelinks" v-if="post.voted != true" valign="top">
+        <span v-on:click="votePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"/></span>
       </td>
       <td class="title">
-        <a v-if="post.typePost == 'ask'" href="/postLink">{{ post.title }}</a>
-        <a v-if="post.typePost != 'ask'" :href="post.url"
-          >{{ post.title }}<span class="sitebit comhead">
-            (<span class="sitestr">{{ post.url }}</span>)</span
-          ></a
-        >
+        <a v-if="post.typePost == 'ask'" :href="'/posts/'+post.id">{{ post.title }}</a>
+        <a v-if="post.typePost != 'ask'" :href="post.url">{{ post.title }}<span class="sitebit comhead">(<span class="sitestr">{{ post.url }}</span>)</span></a>
       </td>
     </tr>
     <tr>
       <td colspan="2"></td>
       <td class="subtext">
-        <span class="score" :id="'score_'+post.id"
-          >{{ post.points }} Points</span
-        >
-        by
-        <a :href="'/user/'+post.user_id">{{ post.user_id }}</a>
-        <span class="age">{{ post.created_at }}</span>
-        <span :id="'unv_'+post.id"></span> |
-        <a :href="'/posts/'+post.id+'/comments'">discuss</a>
-      </td>
+        <span class="score" :id="'score_'+post.id">{{ post.points }} Point<span v-if="post.points != 1">s</span></span> by 
+        <a :href="'/users/'+post.user_id">{{ post.user_username }}</a> <span style="margin-right: 0.2rem;"></span>
+        <span class="age">{{ post.time_elapsed }}</span> <span :id="'unv_'+post.id"></span> | 
+        <a :href="'/posts/'+post.id"><span v-if="post.num_comments == 0">discuss</span><span v-if="post.num_comments != 0">{{ post.num_comments }} comment<span v-if="post.num_comments != 1">s</span></span></a>
+    </td>
     </tr>
     <tr>
       <td colspan="2"></td>
@@ -49,7 +37,6 @@
             </div>
 
             <div class="field helptext">
-              <label for="commentFormText">Text </label>
               <textarea
                 v-model="commentFormText"
                 id="commentFormText"
@@ -57,8 +44,8 @@
               ></textarea>
             </div>
 
-            <div class="actions createpost">
-              <input type="submit" value="Submit Comment" />
+            <div class="actions">
+              <input type="submit" value="add comment" />
             </div>
           </form>
         </small>
