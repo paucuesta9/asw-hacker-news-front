@@ -1,0 +1,17 @@
+.formContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.fieldContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.formOr {
+    margin-left: 2rem;
+}
+
+.formLabel {
+    width: 2rem;
+}
