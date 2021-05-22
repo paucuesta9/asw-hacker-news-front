@@ -5,7 +5,6 @@ import VueRouter from "vue-router";
 import Home from '../views/Home/Home.vue'
 import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
-import Ask from '../views/Ask/Ask.vue'
 import User from '../views/User/User.vue'
 
 Vue.use(VueRouter);
@@ -17,6 +16,16 @@ const routes = [
     component: Home,
   },
   {
+    path: "/newest",
+    name: "Newest",
+    component: Home,
+  },
+  {
+    path: '/ask',
+    name: 'Ask',
+    component: Home,
+  },
+  {
     path: "/submit",
     name: "Submit",
     component: Submit,
@@ -25,11 +34,6 @@ const routes = [
     path: "/posts/:id",
     name: "Post",
     component: Post,
-  },
-  {
-    path: '/ask',
-    name: 'Ask',
-    component: Ask,
   },
   {
     path: "/comments/:id",

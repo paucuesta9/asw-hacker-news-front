@@ -1,32 +1,24 @@
 import axios from 'axios';
 import { DataProvider } from '@/data-providers/_Index.js';
 
-let apiKey = "113818567039641986985";
-axios.defaults.headers.common['X-API-KEY'] = apiKey;
+const apiKeys = [
+    "115878340549743171352",
+    "113818567039641986985",
+]
 
-function getKey() {
-    return apiKey;
-}
-async function setUser() {
-    let user = await DataProvider("USERS", "GET_USER", 2).then((res) => {return res});
+async function setUser(user_id) {
+    let newUserId = user_id == null ? 2 : user_id;
+    axios.defaults.headers.common['X-API-KEY'] = apiKeys[newUserId-1];
+    let user = await DataProvider("USERS", "GET_USER", newUserId).then((res) => {return res});
+    user.apiKey = apiKeys[newUserId-1];
     localStorage.setItem('user', JSON.stringify(user));
     return JSON.parse(localStorage.getItem('user'));
 }
 function getUser() {
     return JSON.parse(localStorage.getItem('user'));
 }
-function setApiKey(newKey) {
-    // Call and set new user
-    apiKey = newKey
-}
-function clearAuthData() {
-    delete axios.defaults.headers.common['X-API-KEY'];
-}
 
 export default {
-    getKey: getKey,
     getUser: getUser,
-    setApiKey: setApiKey,
     setUser: setUser,
-    clearAuthData: clearAuthData,
 }

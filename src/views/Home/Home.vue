@@ -22,7 +22,12 @@ export default {
                 post.user_username = await DataProvider("USERS", "GET_USER", post.user_id).then((res) => {return res.username});
                 post.num_comments = await DataProvider("COMMENTS", "GET_COMMENTS", {post_id: post.id}).then((res) => {return res.length});
             }));
-            newPosts.sort(function(a, b) { return b.points - a.points; })
+            // Filter Posts
+            if(this.$route.name == "Ask") newPosts = newPosts.filter(post => post.typePost == "ask");
+
+            // Sort posts
+            if(this.$route.name == "Newest") newPosts.sort(dateTimeComparator);
+            else newPosts.sort(pointsComparator);
             this.posts = newPosts;
         },
         votePost: function(post){
@@ -39,6 +44,13 @@ export default {
     mounted() {
         this.getPosts();
     }
+}
+
+function dateTimeComparator(a, b) {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+}
+function pointsComparator(a, b) {
+    return b.points - a.points;
 }
 </script>
 

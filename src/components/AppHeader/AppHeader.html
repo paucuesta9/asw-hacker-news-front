@@ -17,23 +17,10 @@
             </span>
           </td>
           <td style="text-align:right;padding-right:4px;">
-            loginButton/LogguedUser
-            <!--<div v-if="someData">
-              <span class="pagetop"> <a href="/user/<%= session[:user_id]%>"><%= session[:username]%></a></span>
-              <span class="pagetop"><a href="/logout">Logout</a></span>
-            </div>-->
-            <!--<div v-if="!someData">
-              <span class="pagetop">
-                <%= button_to '/auth/google_oauth2', class:"myClass" do %>
-                  <div class="google-btn">
-                    <div class="google-icon-wrapper">
-                      <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-                    </div>
-                    <p class="btn-text"><b>Sign in with Google</b></p>
-                  </div>
-                </div>
-              </span>
-            </div>-->
+            <span style="color: black; font-weight: 700;">User: </span>
+            <select v-model="userSelectedId" @change="setNewUser" >
+              <option v-for="user in usersSelectOptions" :value="user.id"> {{user.username}}</option>
+            </select>
           </td>
         </tr>
       </tbody>

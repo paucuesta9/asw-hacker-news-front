@@ -32,11 +32,12 @@ export default {
     AppFooter
   },
   data: () => ({
+    user: JSON.parse(localStorage.getItem('user')),
   }),
   methods: {
   },
   beforeMount() {
-    AuthStore.setUser();
+    AuthStore.setUser(this.user == null ? null : this.user.id);
   }
 
 }
