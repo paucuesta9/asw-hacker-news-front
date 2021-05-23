@@ -1,0 +1,33 @@
+<table style="border: 0;" cellpadding="0" class="itemlist">
+    <tbody>
+      <div v-for="(post, index) in this.posts">
+        <tr class="athing" :id="post.id">
+          <td style="align-self: right;" class="title">
+            <span class="rank">{{ index }}.</span>
+          </td>
+          <td class="votelinks" v-if="post.voted == true">
+            <span v-on:click="unvotePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
+            <span style="color: #ff6600;">*</span>
+            <img src="s.gif" width="1" height="1">
+          </td>
+          <td class="votelinks" v-if="post.voted != true">
+            <span v-on:click="votePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
+          </td>
+          <td class="title">
+            <a v-if="post.typePost == 'ask'" :href="'/posts/'+post.id">{{ post.title }}</a>
+            <a v-if="post.typePost != 'ask'" :href="post.url">{{ post.title }}<span class="sitebit comhead"> (<span class="sitestr">{{ post.url }}</span>)</span></a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"></td>
+          <td class="subtext">
+              <span class="score" :id="'score_'+post.id">{{ post.points }} Point<span v-if="post.points != 1">s</span></span> by 
+              <a :href="'/user/'+post.user_id">{{ post.user_username }}</a> <span style="margin-right: 0.2rem;"></span>
+              <span class="age">{{ post.time_elapsed }}</span> <span :id="'unv_'+post.id"></span> | 
+              <a :href="'/posts/'+post.id"><span v-if="post.num_comments == 0">discuss</span><span v-if="post.num_comments != 0">{{ post.num_comments }} comment<span v-if="post.num_comments != 1">s</span></span></a>
+          </td>
+        </tr>
+        <tr class="spacer" style="height:5px"></tr>
+      </div>
+    </tbody>
+  </table>
