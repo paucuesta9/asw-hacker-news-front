@@ -10,7 +10,7 @@ export default {
         about: "",
     }),
     methods: {
-        userdata: function(e){
+        userData: function(e){
             e.preventDefault();
             if(this.about != "") {
                 this.about = "";
@@ -49,4 +49,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./User.scss"></style>
+<style scoped lang="scss" src="./User.scss"></style>

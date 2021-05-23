@@ -7,6 +7,9 @@ import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
 import Ask from '../views/Ask/Ask.vue'
 import User from '../views/User/User.vue'
+import Comment from '../views/Comment/Comment.vue'
+import Reply from '../views/Reply/Reply.vue'
+import UpvotedPost from '../views/UpvotedPost/UpvotedPost.vue'
 
 Vue.use(VueRouter);
 
@@ -37,9 +40,19 @@ const routes = [
     component: Comment,
   },
   {
-    path: "/users",
+    path: "/replies/:id",
+    name: "Reply",
+    component: Reply,
+  },
+  {
+    path: "/users/:id",
     name: "User",
     component: User,
+  },
+  {
+    path: "/uposts/:id",
+    name: "UpvotedPost",
+    component: UpvotedPost,
   },
 ];
 

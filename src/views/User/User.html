@@ -1,41 +1,39 @@
 <div>
-    <div>
-         <p>{{error}}</p>
+        <label class="formLabel" for="User">user:</label>
     </div>
-    <div class="field username"> user: 
-        <span class="username"
-              >{{ user.username }}
-        </span>
+    <div class="labels">
+        <label class="formLabel" for="ApiKey">ApiKey:</label>
     </div>
-    <div class="field apikey"> Api key:
-        <span class="apikey"
-              >{{ user.apikey }}
-        </span>
+    <div class="labels">
+        <label class="formLabel" for="Created">created:</label>
     </div>
-    <div class="field created_at"> created: 
-        <span class="created_at">{{ user.created_at }}</span>
+    <div class="aboutBox" style="margin-bottom: 0.5rem;">
+        <label class="formLabel"> about </label>
+        <textarea v-model="about" id="about" name="about"></textarea>
+        <label class="formLabel"> help </label> <br>
     </div>
-    <div class="field about">
-        <label for="about"> about: </label>
-        <textarea v-model="about" id="about" name="about"></textarea> help <br>
+    <div class = "links">
+    <tr> <td><a href="/user/'+user.id"><u>submissions</u></a></td> </tr>
+    <tr> <td><a href="/user"><u>comments</u></a></td> </tr>
+    <tr> <td><a href="/user"><u>upvoted submissions</u></a></td> </tr>
+    <tr> <td><a href="/user"><u>upvoted comments</u></a></td> </tr>
     </div>
-    <form @user="userData"></form>
-        <div class="actions updateuser">
-            <input
-              type="submit"
-              value="Update User"
-            >
-          </div>
+    <form @user="userData">
+        <div>
+            <p>{{error}}</p>
+        </div>
+        <div>
+            <input type="submit" value="Update User" >
+        </div>
     </form>
-    submissions <br>
-    comments <br>
-    upvoted submissions <br>
-    upvoted comments <br>
 </div>
 
-<!-- Comment 
-where does apikey come from?
-how to get user attributes (doesnt work right now because its
-not user/:id
-how to make words link to an area)
+<!-- Comment
+<td><a href="/user/'+user.id"><u>submissions</u></a></td>
+<a> :href="'/newest"> {submmissions} </a> why doesnt this work
+how to retrieve user attributes (user.username, user.created_at, user.apikey, user.about
+line 7 when i put space in apikey it gets seperated
+about is cut off
+move help next to about down
+make buttons have less spacing
 -->
