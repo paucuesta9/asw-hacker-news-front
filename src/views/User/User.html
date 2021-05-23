@@ -1,4 +1,5 @@
 <div>
+    <div class="labels">
         <label class="formLabel" for="User">user:</label>
     </div>
     <div class="labels">
@@ -13,10 +14,10 @@
         <label class="formLabel"> help </label> <br>
     </div>
     <div class = "links">
-    <tr> <td><a href="/user/'+user.id"><u>submissions</u></a></td> </tr>
-    <tr> <td><a href="/user"><u>comments</u></a></td> </tr>
-    <tr> <td><a href="/user"><u>upvoted submissions</u></a></td> </tr>
-    <tr> <td><a href="/user"><u>upvoted comments</u></a></td> </tr>
+        <tr> <td><a href="/user/'+user.id"><u>submissions</u></a></td> </tr>
+        <tr> <td><a href="/user"><u>comments</u></a></td> </tr>
+        <tr> <td><a href="/user"><u>upvoted submissions</u></a></td> </tr>
+        <tr> <td><a href="/user"><u>upvoted comments</u></a></td> </tr>
     </div>
     <form @user="userData">
         <div>
