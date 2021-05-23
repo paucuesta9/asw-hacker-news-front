@@ -8,8 +8,6 @@ import Post from '../views/Post/Post.vue'
 import Ask from '../views/Ask/Ask.vue'
 import User from '../views/User/User.vue'
 import Comment from '../views/Comment/Comment.vue'
-import Reply from '../views/Reply/Reply.vue'
-import UpvotedPost from '../views/UpvotedPost/UpvotedPost.vue'
 
 Vue.use(VueRouter);
 
