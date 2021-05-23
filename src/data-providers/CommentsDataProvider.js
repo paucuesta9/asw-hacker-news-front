@@ -38,55 +38,6 @@ export const CommentsDataProvider = (type, params, urlAPI) => {
       }
       break;
 
-    case "NEW_COMMENT":
-      uri = urlAPI + '/comments';
-      options = {
-          method: 'POST',
-          url: uri,
-          data: params,
-      }
-      return axios(options).then((res) => {
-          return res.data;
-      }).catch((error) => {
-          console.log(error);
-      });
-
-    case "VOTE_COMMENT":
-      uri = urlAPI + '/comments/'+params+'/vote';
-      options = {
-          method: 'POST',
-          url: uri,
-      }
-      return axios(options).then((res) => {
-          return res.data;
-      }).catch((error) => {
-          console.log(error);
-      });
-
-    case "UNVOTE_COMMENT":
-      uri = urlAPI + '/comments/'+params+'/vote';
-      options = {
-          method: 'DELETE',
-          url: uri,
-      }
-      return axios(options).then((res) => {
-          return res.data;
-      }).catch((error) => {
-          console.log(error);
-      });
-
-    case "GET_VOTED_COMMENTS":
-      uri = urlAPI + '/comments/upvoted';
-      options = {
-          method: 'GET',
-          url: uri,
-      }
-      return axios(options).then((res) => {
-          return res.data;
-      }).catch((error) => {
-          console.log(error);
-      });
-
     //case "LOGOUT":
     //    console.log(urlAPIAuth);
     //    break;

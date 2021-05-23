@@ -6,6 +6,7 @@ import Home from '../views/Home/Home.vue'
 import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
 import User from '../views/User/User.vue'
+import Threads from '../views/Threads/Threads.vue'
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,11 @@ const routes = [
     path: "/users",
     name: "User",
     component: User,
+  },
+  {
+    path: "/threads",
+    name: "Threads",
+    component: Threads,
   },
 ];
 
