@@ -1,42 +1,38 @@
 <div>
-    <div class="labels">
-        <label class="formLabel" for="User">user:</label>
-    </div>
-    <div class="labels">
-        <label class="formLabel" for="ApiKey">ApiKey:</label>
-    </div>
-    <div class="labels">
-        <label class="formLabel" for="Created">created:</label>
-    </div>
-    <div class="aboutBox" style="margin-bottom: 0.5rem;">
-        <label class="formLabel"> about </label>
-        <textarea v-model="about" id="about" name="about"></textarea>
-        <label class="formLabel"> help </label> <br>
-    </div>
-    <div class = "links">
-        <tr> <td><a href="/user/'+user.id"><u>submissions</u></a></td> </tr>
-        <tr> <td><a href="/user"><u>comments</u></a></td> </tr>
-        <tr> <td><a href="/user"><u>upvoted submissions</u></a></td> </tr>
-        <tr> <td><a href="/user"><u>upvoted comments</u></a></td> </tr>
-    </div>
-    <form @user="userData">
-        <div>
-            <p>{{error}}</p>
+    <form @submit="userData">
+        <div class="labels">
+            <label class="formLabel" for="User">user: </label>
+            {{user.id}}
+        </div>
+        <div class="labels" v-if="loggedUser.id == user.id">
+            <label class="formLabel" for="ApiKey">Api Key: </label>
+            {{loggedUser.apiKey}}
+        </div>
+        <div class="labels">
+            <label class="formLabel" for="Created">created:</label>
+            {{user.created_atAgo}}
+        </div>
+        <div class="aboutBox" style="margin-bottom: 0.5rem;">
+            <label style= "margin-right: 0rem;" class="formLabel"> about: </label>
+            <textarea v-if="loggedUser.id == user.id" v-model="about" id="about" name="about"></textarea>
+            <div v-if="loggedUser.id != user.id"> {{user.about}}</div>
+            <label style="align-self: flex-end;" class="formLabel"> help </label> <br>
+        </div>
+        <div class = "links">
+            <div><a :href="'/users/'+user.id"><u>submissions</u></a> </div>
+            <div><a :href="'/users/'+user.id"><u>comments</u></a> </div>
+            <div v-if="loggedUser.id == user.id"><a :href="'/uposts/'+user.id"><u>upvoted submissions</u></a> </div>
+            <div v-if="loggedUser.id == user.id"><a :href="'/users/'+user.id"><u>upvoted comments</u></a> </div>
         </div>
         <div>
+        <p>{{error}}</p>
+        </div>
+        <div v-if="loggedUser.id == user.id">
             <input type="submit" value="Update User" >
         </div>
     </form>
 </div>
 
 <!-- Comment
-line 17: <td><a href="/user/'+user.id"><u>submissions</u></a></td>
-<a> :href="'/newest"> {submmissions} </a> why doesnt this work
-how to retrieve user attributes (user.username, user.created_at, user.apikey, user.about
-line 7 when i put space in apikey it gets seperated
-
-
-about is cut off
-move help next to about down
 make buttons have less spacing
 -->
