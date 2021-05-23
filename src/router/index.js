@@ -38,19 +38,9 @@ const routes = [
     component: Comment,
   },
   {
-    path: "/replies/:id",
-    name: "Reply",
-    component: Reply,
-  },
-  {
     path: "/users/:id",
     name: "User",
     component: User,
-  },
-  {
-    path: "/uposts/:id",
-    name: "UpvotedPost",
-    component: UpvotedPost,
   },
 ];
 
