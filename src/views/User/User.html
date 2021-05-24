@@ -1,41 +1,38 @@
 <div>
-    <div>
-         <p>{{error}}</p>
-    </div>
-    <div class="field username"> user: 
-        <span class="username"
-              >{{ user.username }}
-        </span>
-    </div>
-    <div class="field apikey"> Api key:
-        <span class="apikey"
-              >{{ user.apikey }}
-        </span>
-    </div>
-    <div class="field created_at"> created: 
-        <span class="created_at">{{ user.created_at }}</span>
-    </div>
-    <div class="field about">
-        <label for="about"> about: </label>
-        <textarea v-model="about" id="about" name="about"></textarea> help <br>
-    </div>
-    <form @user="userData"></form>
-        <div class="actions updateuser">
-            <input
-              type="submit"
-              value="Update User"
-            >
-          </div>
+    <form @submit="userData">
+        <div class="labels">
+            <label class="formLabel" for="User">user: </label>
+            {{user.id}}
+        </div>
+        <div class="labels" v-if="loggedUser.id == user.id">
+            <label class="formLabel" for="ApiKey">Api Key: </label>
+            {{loggedUser.apiKey}}
+        </div>
+        <div class="labels">
+            <label class="formLabel" for="Created">created:</label>
+            {{user.created_atAgo}}
+        </div>
+        <div class="aboutBox" style="margin-bottom: 0.5rem;">
+            <label style= "margin-right: 0rem;" class="formLabel"> about: </label>
+            <textarea v-if="loggedUser.id == user.id" v-model="about" id="about" name="about"></textarea>
+            <div v-if="loggedUser.id != user.id"> {{user.about}}</div>
+            <label style="align-self: flex-end;" class="formLabel"> help </label> <br>
+        </div>
+        <div class = "links">
+            <div><a :href="'/users/'+user.id"><u>submissions</u></a> </div>
+            <div><a :href="'/users/'+user.id"><u>comments</u></a> </div>
+            <div v-if="loggedUser.id == user.id"><a :href="'/uposts/'+user.id"><u>upvoted submissions</u></a> </div>
+            <div v-if="loggedUser.id == user.id"><a :href="'/users/'+user.id"><u>upvoted comments</u></a> </div>
+        </div>
+        <div>
+        <p>{{error}}</p>
+        </div>
+        <div v-if="loggedUser.id == user.id">
+            <input type="submit" value="Update User" >
+        </div>
     </form>
-    submissions <br>
-    comments <br>
-    upvoted submissions <br>
-    upvoted comments <br>
 </div>
 
-<!-- Comment 
-where does apikey come from?
-how to get user attributes (doesnt work right now because its
-not user/:id
-how to make words link to an area)
+<!-- Comment
+make buttons have less spacing
 -->

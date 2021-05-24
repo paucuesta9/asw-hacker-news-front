@@ -2,18 +2,28 @@
 
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
+import { getTimeSince } from '@/helpers/index.js';
 
 export default {
     name: 'User',
     data: () => ({
-        user: localStorage.getItem('user'),
+        loggedUser: JSON.parse(localStorage.getItem('user')),
+        user: {},
         about: "",
+        error: "",
     }),
     methods: {
-        userdata: function(e){
+        getUser: async function(){
+            let newUser = await DataProvider("USERS", "GET_USER", this.$route.params.id).then((res) => {return res});
+            console.log(newUser);
+            newUser.created_atAgo = getTimeSince(newUser.created_at);
+            this.user = newUser;
+            this.about = newUser.about;
+        },
+        userData: function(e){
             e.preventDefault();
             if(this.about != "") {
-                this.about = "";
+                DataProvider("USERS", "PUT_USER", {about:this.about})
             }
             else {
                 this.error = "The user can't have an empty about!";
@@ -46,7 +56,10 @@ export default {
             return Math.floor(seconds) + " seconds";
         },
     },
+    beforeMount() {
+        this.getUser();
+    }
 }
 </script>
 
-<style lang="scss" src="./User.scss"></style>
+<style scoped lang="scss" src="./User.scss"></style>

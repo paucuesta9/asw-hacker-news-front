@@ -8,6 +8,8 @@ import Post from '../views/Post/Post.vue'
 import User from '../views/User/User.vue'
 import Threads from '../views/Threads/Threads.vue'
 import Comment from '../views/Comment/Comment.vue'
+import Reply from '../views/Reply/Reply.vue'
+import UpvotedPost from '../views/UpvotedPost/UpvotedPost.vue'
 
 Vue.use(VueRouter);
 
@@ -43,7 +45,13 @@ const routes = [
     component: Comment,
   },
   {
+    path: "/replies/:id",
+    name: "Reply",
+    component: Reply,
+  },
+  {
     path: "/users",
+    path: "/users/:id",
     name: "User",
     component: User,
   },
@@ -51,6 +59,11 @@ const routes = [
     path: "/threads",
     name: "Threads",
     component: Threads,
+  },
+  {
+    path: "/uposts/:id",
+    name: "UpvotedPost",
+    component: UpvotedPost,
   },
 ];
 
