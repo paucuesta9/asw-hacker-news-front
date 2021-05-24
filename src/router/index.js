@@ -59,6 +59,11 @@ const routes = [
     name: "UpvotedPost",
     component: UpvotedPost,
   },
+  {
+    path: "/replies/:id",
+    name: "Reply",
+    component: Reply,
+  },
 ];
 
 const router = new VueRouter({

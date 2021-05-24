@@ -19,7 +19,10 @@
               <a href="/users/3">
                 <span color="#3c963c">{{ JSON.parse(user).username }}</span>
               </a>
-              <span class="age"><a href="/threads"> {{ timeAgo(comment.created_at) }} ago</a></span> 
+              <span class="age">
+                <a v-if="!comment.parent_id" :href="'/comments/' + comment.id"> {{ timeAgo(comment.created_at) }} ago</a>
+                <a a v-if="!!comment.parent_id" :href="'/replies/' + comment.id"> {{ timeAgo(comment.created_at) }} ago</a>
+              </span> 
               <span class="par"> | 
                 <a v-if="!comment.parent_id" :href="'/posts/' + comment.post_id">parent</a></span>
                 <a v-if="comment.parent_id" :href="'/comments/' + comment.parent_id">parent</a></span> 

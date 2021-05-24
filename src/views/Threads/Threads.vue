@@ -12,7 +12,7 @@ export default {
     methods: {
         getComments: async function() {
             let userComments = await DataProvider("COMMENTS", "GET_COMMENTS", {user_id: "1"}).then((res) => {return res});
-            let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENT").then((res) => {return res});
+            let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
 
             await Promise.all(userComments.map(async (comment) => {
                 comment.voted = votedComments.find(vc => vc.id == comment.id) != undefined ? true : false;
