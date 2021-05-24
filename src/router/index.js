@@ -6,6 +6,7 @@ import Home from '../views/Home/Home.vue'
 import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
 import User from '../views/User/User.vue'
+import Threads from '../views/Threads/Threads.vue'
 import Comment from '../views/Comment/Comment.vue'
 import Reply from '../views/Reply/Reply.vue'
 import UpvotedPost from '../views/UpvotedPost/UpvotedPost.vue'
@@ -53,6 +54,11 @@ const routes = [
     path: "/users/:id",
     name: "User",
     component: User,
+  },
+  {
+    path: "/threads",
+    name: "Threads",
+    component: Threads,
   },
   {
     path: "/uposts/:id",
