@@ -7,6 +7,7 @@ import Submit from '../views/Submit/Submit.vue'
 import Post from '../views/Post/Post.vue'
 import User from '../views/User/User.vue'
 import Threads from '../views/Threads/Threads.vue'
+import Comment from '../views/Comment/Comment.vue'
 
 Vue.use(VueRouter);
 

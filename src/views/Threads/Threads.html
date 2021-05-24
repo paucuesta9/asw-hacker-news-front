@@ -6,7 +6,7 @@
             <span class="rank">{{ index }}.</span>
           </td>
           <td class="votelinks" v-if="comment.voted == true">
-            <span v-on:click="unvoteComment(comment)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
+            <span v-on:click="unvoteComment(comment)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
             <span style="color: #ff6600;">*</span>
             <img src="s.gif" width="1" height="1">
           </td>
@@ -15,14 +15,17 @@
           </td>
           <td class="default">
             <span class="comhead">
-              <span class="score" :id="'score_'+comment.id">{{ comment.votes }} Point<span v-if="comment.votes != 1">s</span></span> by 
+              <span class="score" :id="'score_' + comment.id">{{ comment.votes }} Point<span v-if="comment.votes != 1">s</span></span> by 
               <a href="/users/3">
                 <span color="#3c963c">{{ JSON.parse(user).username }}</span>
               </a>
               <span class="age"><a href="/threads"> {{ timeAgo(comment.created_at) }} ago</a></span> 
-              <span class="par"> | <a :href="'/posts/'+comment.post_id">parent</a></span> 
-              <span class="storyon"> | on: <a v-if="!comment.parent_id" :href="'/posts/'+comment.post_id"> {{ comment.pare }} </a>
-                <a v-if="comment.parent_id" :href="'/posts/'+comment.parent_id">{{ comment.pare }}</a>
+              <span class="par"> | 
+                <a v-if="!comment.parent_id" :href="'/posts/' + comment.post_id">parent</a></span>
+                <a v-if="comment.parent_id" :href="'/comments/' + comment.parent_id">parent</a></span> 
+              <span class="storyon"> | on:
+                <a v-if="!comment.parent_id" :href="'/posts/' + comment.post_id"> {{ comment.parentText }} </a>
+                <a v-if="!!comment.parent_id" :href="'/comments/' + comment.parent_id">{{ comment.parentText }}</a>
             </span>
               <br>
               <div class="comment">
@@ -30,7 +33,10 @@
                 <div class="reply">        
                   <p>
                     <font size="1">
-                    <u><a href="/comments/2">reply</a></u>
+                    <u>
+                      <a v-if="!comment.parent_id" :href="'/comments/' + comment.id">reply</a>
+                      <a v-if="!!comment.parent_id" :href="'/replies/' + comment.id">reply</a>
+                    </u>
                     </font>
                   </p>
                 </div>
