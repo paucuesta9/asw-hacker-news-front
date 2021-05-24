@@ -21,8 +21,8 @@
               </a>
               <span class="age"><a href="/threads"> {{ timeAgo(comment.created_at) }} ago</a></span> 
               <span class="par"> | <a :href="'/posts/'+comment.post_id">parent</a></span> 
-              <span class="storyon"> | on: <a v-if="!comment.parent_id" :href="'/posts/'+comment.post_id"> {{ comment.parentText }} </a>
-                <a v-if="comment.parent_id" :href="'/posts/'+comment.parent_id">{{ comment.parentText }}</a>
+              <span class="storyon"> | on: <a v-if="!comment.parent_id" :href="'/posts/'+comment.post_id"> {{ comment.pare }} </a>
+                <a v-if="comment.parent_id" :href="'/posts/'+comment.parent_id">{{ comment.pare }}</a>
             </span>
               <br>
               <div class="comment">

@@ -12,25 +12,15 @@ export default {
     methods: {
         getComments: async function() {
             let userComments = await DataProvider("COMMENTS", "GET_COMMENTS", {user_id: "1"}).then((res) => {return res});
+            let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
             this.comments =  userComments;
-        },
 
-        getText: async function() {
-            this.comments.forEach(async x => {
-                let id;
-
-                if (!!x.parent_id) {
-                    id = x.parent_id;
-                    let text = await DataProvider("COMMENTS", "GET_COMMENT", {comment_id: x.parent_id}).then((res) => {return res});
-                    x.parentText = text.text;
-                }
-
-                else {
-                    let text = await DataProvider("POSTS", "GET_POST", {post_id: x.post_id}).then((res) => {return res});
-                    x.parentText = text.text;
-
-                }
-            });
+            await Promise.all(userComments.map(async (comment) => {
+                comment.voted = votedComments.find(c => c.id == comment.id) != undefined ? true : false;
+                console.log(DataProvider("POSTS", "GET_POST", {id: comment.post_id}));
+                comment.pare = await DataProvider("POSTS", "GET_POST", {post_id: comment.post_id == undefined ? comment.parent_id : comment.post_id}).then((res) => {return res.id});
+                console.log(comment.pare);
+            }));
         },
 
         voteComment: function (comment) {
@@ -71,12 +61,9 @@ export default {
 
     beforeMount() {
         this.getComments();
-        this.getText();
     },
 
     mounted() {
-        /* this.getComments();
-        this.getText(); */
     }
 }
 </script>
