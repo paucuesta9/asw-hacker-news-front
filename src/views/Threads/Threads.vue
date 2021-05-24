@@ -12,33 +12,40 @@ export default {
     methods: {
         getComments: async function() {
             let userComments = await DataProvider("COMMENTS", "GET_COMMENTS", {user_id: "1"}).then((res) => {return res});
-            this.comments =  userComments;
-        },
+            let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENT").then((res) => {return res});
 
-        getText: async function() {
-            this.comments.forEach(async x => {
+            await Promise.all(userComments.map(async (comment) => {
+                comment.voted = votedComments.find(vc => vc.id == comment.id) != undefined ? true : false;
+                comment.typeParent = !!comment.id_post ? "post" : "comment";
+
                 let id;
 
-                if (!!x.parent_id) {
-                    id = x.parent_id;
-                    let text = await DataProvider("COMMENTS", "GET_COMMENT", {comment_id: x.parent_id}).then((res) => {return res});
-                    x.parentText = text.text;
+                if (!!comment.parent_id) {
+                    id = comment.parent_id;
+                    let text = await DataProvider("COMMENTS", "GET_COMMENT", {comment_id: comment.parent_id}).then((res) => {return res});
+                    comment.parentText = text.text;
                 }
 
                 else {
-                    let text = await DataProvider("POSTS", "GET_POST", {post_id: x.post_id}).then((res) => {return res});
-                    x.parentText = text.text;
+                    let text = await DataProvider("POSTS", "GET_POST", {post_id: comment.post_id}).then((res) => {return res});
+                    comment.parentText = text.text;
 
                 }
-            });
+            }));
+
+            this.comments = userComments;
         },
 
         voteComment: function (comment) {
-
+            DataProvider("COMMENTS", "VOTE_COMMENT", comment.id).then((res) => {
+              this.getComments();
+            });
         },
 
         unvoteComment: function (comment) {
-
+            DataProvider("COMMENTS", "UNVOTE_COMMENT", comment.id).then((res) => {
+              this.getComments();
+            });
         },
 
         timeAgo: function(time) {
@@ -71,12 +78,9 @@ export default {
 
     beforeMount() {
         this.getComments();
-        this.getText();
     },
 
     mounted() {
-        /* this.getComments();
-        this.getText(); */
     }
 }
 </script>
