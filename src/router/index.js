@@ -82,6 +82,11 @@ const routes = [
     name: "Posts",
     component: UserPosts,
   },
+  {
+    path: "/users/:id",
+    name: "User_id",
+    component: User,
+  },
 ];
 
 const router = new VueRouter({
