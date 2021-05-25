@@ -2,14 +2,15 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // Routes
-import Home from '../views/Home/Home.vue'
-import Submit from '../views/Submit/Submit.vue'
-import Post from '../views/Post/Post.vue'
-import User from '../views/User/User.vue'
-import Threads from '../views/Threads/Threads.vue'
-import Comment from '../views/Comment/Comment.vue'
-import Reply from '../views/Reply/Reply.vue'
-import UpvotedPost from '../views/UpvotedPost/UpvotedPost.vue'
+import Home from "../views/Home/Home.vue";
+import Submit from "../views/Submit/Submit.vue";
+import Post from "../views/Post/Post.vue";
+import User from "../views/User/User.vue";
+import Threads from "../views/Threads/Threads.vue";
+import Comment from "../views/Comment/Comment.vue";
+import Reply from "../views/Reply/Reply.vue";
+import UpvotedPost from "../views/UpvotedPost/UpvotedPost.vue";
+import UserPosts from "../views/UserPosts/UserPosts.vue";
 
 Vue.use(VueRouter);
 
@@ -25,8 +26,8 @@ const routes = [
     component: Home,
   },
   {
-    path: '/ask',
-    name: 'Ask',
+    path: "/ask",
+    name: "Ask",
     component: Home,
   },
   {
@@ -63,6 +64,11 @@ const routes = [
     path: "/replies/:id",
     name: "Reply",
     component: Reply,
+  },
+  {
+    path: "/posts_user/:id",
+    name: "Posts",
+    component: UserPosts,
   },
 ];
 
