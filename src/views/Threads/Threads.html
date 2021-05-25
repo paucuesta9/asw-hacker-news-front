@@ -16,7 +16,7 @@
           <td class="default">
             <span class="comhead">
               <span class="score" :id="'score_' + comment.id">{{ comment.votes }} Point<span v-if="comment.votes != 1">s</span></span> by 
-              <a href="/users/3">
+              <a :href="'/users/' + JSON.parse(user).id">
                 <span color="#3c963c">{{ JSON.parse(user).username }}</span>
               </a>
               <span class="age">
