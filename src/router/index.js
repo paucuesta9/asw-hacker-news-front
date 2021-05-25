@@ -25,6 +25,18 @@ const routes = [
     name: "Newest",
     component: Home,
   },
+  
+  {
+    path: "/comments/upvoted",
+    name: "Comments_voted",
+    component: Threads,
+  },
+  {
+    path: "/replies/upvoted",
+    name: "Replies_voted",
+    component: Threads,
+  },
+  
   {
     path: "/ask",
     name: "Ask",

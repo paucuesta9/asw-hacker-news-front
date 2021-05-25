@@ -31,6 +31,10 @@ export default {
                     comment.parentText = text.text;
 
                 }
+                
+                if(this.$route.name == "Comments_voted") userComments = userComments.filter(comment => comment.voted);
+                if(this.$route.name == "Replies_voted") userComments = userComments.filter(reply => reply.voted);
+                
             }));
 
             this.comments = userComments;
@@ -82,6 +86,9 @@ export default {
 
     mounted() {
     }
+}
+function pointsComparator(a, b) {
+    return b.points - a.points;
 }
 </script>
 
