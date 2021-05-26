@@ -7,7 +7,6 @@
           </td>
           <td class="votelinks" v-if="comment.voted == true">
             <span v-on:click="unvoteComment(comment)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
-            <span style="color: #ff6600;">*</span>
             <img src="s.gif" width="1" height="1">
           </td>
           <td class="votelinks" v-if="comment.voted != true">
@@ -16,12 +15,12 @@
           <td class="default">
             <span class="comhead">
               <span class="score" :id="'score_' + comment.id">{{ comment.votes }} Point<span v-if="comment.votes != 1">s</span></span> by 
-              <a :href="'/users/' + JSON.parse(user).id">
-                <span color="#3c963c">{{ JSON.parse(user).username }}</span>
+              <a :href="'/users/' + comment.user_id">
+                <span color="#3c963c">{{ comment.user_username }}</span>
               </a>
               <span class="age">
-                <a v-if="!comment.parent_id" :href="'/comments/' + comment.id"> {{ timeAgo(comment.created_at) }} ago</a>
-                <a a v-if="!!comment.parent_id" :href="'/replies/' + comment.id"> {{ timeAgo(comment.created_at) }} ago</a>
+                <a v-if="!comment.parent_id" :href="'/comments/' + comment.id"> {{ comment.time_elapsed }} ago</a>
+                <a a v-if="!!comment.parent_id" :href="'/replies/' + comment.id"> {{ comment.time_elapsed }} ago</a>
               </span> 
               <span class="par"> | 
                 <a v-if="!comment.parent_id" :href="'/posts/' + comment.post_id">parent</a></span>

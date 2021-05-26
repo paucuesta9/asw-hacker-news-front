@@ -2,39 +2,42 @@
 
 <script>
 import { DataProvider } from '@/data-providers/_Index.js';
+import { getTimeSince } from '@/helpers/index.js';
 
 export default {
     name: 'Threads',
     data: () => ({
-        user: localStorage.getItem('user'),
+        user: JSON.parse(localStorage.getItem('user')),
         comments: [],
     }),
     methods: {
         getComments: async function() {
-            let userComments = await DataProvider("COMMENTS", "GET_COMMENTS", {user_id: "1"}).then((res) => {return res});
+            let userComments = [];
+            if(this.$route.name == "CommentsUser") {
+                userComments = await DataProvider("COMMENTS", "GET_COMMENTS", {user_id: this.$route.params.id}).then((res) => {return res});
+            }
+            else if(this.$route.name == "Threads") {
+                userComments = await DataProvider("COMMENTS", "GET_COMMENTS", {user_id: this.user.id}).then((res) => {return res});
+            }
+            else if(this.$route.name == "Comments_voted") {
+                userComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
+            }
             let votedComments = await DataProvider("COMMENTS", "GET_VOTED_COMMENTS").then((res) => {return res});
-
+            
             await Promise.all(userComments.map(async (comment) => {
                 comment.voted = votedComments.find(vc => vc.id == comment.id) != undefined ? true : false;
                 comment.typeParent = !!comment.id_post ? "post" : "comment";
-
-                let id;
-
+                comment.time_elapsed = getTimeSince(comment.created_at);
+                comment.user_username = await DataProvider("USERS", "GET_USER", comment.user_id).then((res) => {return res.username});
                 if (!!comment.parent_id) {
-                    id = comment.parent_id;
                     let text = await DataProvider("COMMENTS", "GET_COMMENT", {comment_id: comment.parent_id}).then((res) => {return res});
                     comment.parentText = text.text;
                 }
-
                 else {
                     let text = await DataProvider("POSTS", "GET_POST", {post_id: comment.post_id}).then((res) => {return res});
                     comment.parentText = text.text;
 
                 }
-                
-                if(this.$route.name == "Comments_voted") userComments = userComments.filter(comment => comment.voted);
-                if(this.$route.name == "Replies_voted") userComments = userComments.filter(reply => reply.voted);
-                
             }));
 
             this.comments = userComments;
@@ -51,41 +54,11 @@ export default {
               this.getComments();
             });
         },
-
-        timeAgo: function(time) {
-            var seconds = Date.now() - new Date(time);
-            seconds = Math.floor(seconds/1000);
-            var interval = seconds / 31536000;
-
-            if (interval > 1) {
-                return Math.floor(interval) + " years";
-            }
-            interval = seconds / 2592000;
-            if (interval > 1) {
-                return Math.floor(interval) + " months";
-            }
-            interval = seconds / 86400;
-            if (interval > 1) {
-                return Math.floor(interval) + " days";
-            }
-            interval = seconds / 3600;
-            if (interval > 1) {
-                return Math.floor(interval) + " hours";
-            }
-            interval = seconds / 60;
-            if (interval > 1) {
-                return Math.floor(interval) + " minutes";
-            }
-            return Math.floor(seconds) + " seconds";
-        },
     },
 
     beforeMount() {
         this.getComments();
     },
-
-    mounted() {
-    }
 }
 function pointsComparator(a, b) {
     return b.points - a.points;

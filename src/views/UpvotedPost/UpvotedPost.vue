@@ -8,16 +8,9 @@ export default {
     name: 'UpvotedPost',
     data: () => ({
         user: JSON.parse(localStorage.getItem('user')),
-        userN: {},
         posts: [],
     }),
     methods: {
-        getUser: async function(){
-            let newUser = await DataProvider("USERS", "GET_USER", this.$route.params.id).then((res) => {return res});
-            console.log(newUser);
-            newUser.created_atAgo = getTimeSince(newUser.created_at);
-            this.userN = newUser;
-        },
         getPosts: async function(){
             let newPosts = await DataProvider("POSTS", "GET_POSTS").then((res) => {return res});
             let votedPosts = await DataProvider("POSTS", "GET_VOTED_POSTS").then((res) => {return res});
@@ -44,7 +37,6 @@ export default {
         },
     },
     mounted() {
-        this.getUser();
         this.getPosts();
     }
 }

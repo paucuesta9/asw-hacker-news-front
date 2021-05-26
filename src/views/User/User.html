@@ -20,9 +20,9 @@
         </div>
         <div class = "links">
             <div><a :href="'/posts_user/'+user.id"><u>submissions</u></a> </div>
-            <div><a :href="'/threads/'"><u>comments</u></a> </div>
-            <div v-if="loggedUser.id == user.id"><a :href="'/uposts/'+user.id"><u>upvoted submissions</u></a> </div>
-            <div v-if="loggedUser.id == user.id"><a :href="'/users/'+user.id"><u>upvoted comments</u></a> </div>
+            <div><a :href="'/comments/user/'+user.id"><u>comments</u></a> </div>
+            <div v-if="loggedUser.id == user.id"><a href="/uposts"><u>upvoted submissions</u></a> </div>
+            <div v-if="loggedUser.id == user.id"><a href="/comments/upvoted"><u>upvoted comments</u></a> </div>
         </div>
         <div>
         <p>{{error}}</p>

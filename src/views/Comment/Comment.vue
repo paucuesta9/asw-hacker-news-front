@@ -36,12 +36,12 @@ export default {
             if(this.replyFormText != "") {
                 this.replyFormError = "";
                 let newReply = {
-                   text: this.commentFormText,
+                   text: this.replyFormText,
                    parent_id: this.$route.params.id,
                    parent_type: "Comment",
                 }
-                DataProvider("REPLIES", "NEW_REPLY", newPost).then(() => {
-                   this.$router.push({ name: "Home"})
+                DataProvider("REPLIES", "NEW_REPLY", newReply).then(() => {
+                    this.$router.push("/posts/"+this.comment.post_id);
                 }).catch((error) => {
                    this.error = error;
                 });

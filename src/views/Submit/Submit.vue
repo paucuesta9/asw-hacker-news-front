@@ -16,10 +16,7 @@ export default {
         submitFormData: function(e){
             e.preventDefault();
             if(this.title != "") {
-                if(this.url != "" && this.text != "") {
-                    this.error = "You cannot fill both text and url fields";
-                }
-                else if(this.url == "" && this.text == "") {
+                if(this.url == "" && this.text == "") {
                     this.error = "You need to fill either text or url fields";
                 }
                 else {

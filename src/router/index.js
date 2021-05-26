@@ -25,18 +25,11 @@ const routes = [
     name: "Newest",
     component: Home,
   },
-  
   {
     path: "/comments/upvoted",
     name: "Comments_voted",
     component: Threads,
   },
-  {
-    path: "/replies/upvoted",
-    name: "Replies_voted",
-    component: Threads,
-  },
-  
   {
     path: "/ask",
     name: "Ask",
@@ -68,7 +61,7 @@ const routes = [
     component: Threads,
   },
   {
-    path: "/uposts/:id",
+    path: "/uposts",
     name: "UpvotedPost",
     component: UpvotedPost,
   },
@@ -86,6 +79,11 @@ const routes = [
     path: "/users/:id",
     name: "User_id",
     component: User,
+  },
+  {
+    path: "/comments/user/:id",
+    name: "CommentsUser",
+    component: Threads,
   },
 ];
 

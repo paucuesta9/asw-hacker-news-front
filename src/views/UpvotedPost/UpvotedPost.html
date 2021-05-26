@@ -1,13 +1,12 @@
 <table style="border: 0;" cellpadding="0" class="itemlist">
     <tbody>
       <div v-for="(post, index) in this.posts">
-        <div v-if="post.voted == true && userN.id == post.user_id">
+        <div v-if="post.voted == true">
             <tr class="athing" :id="post.id">
             <td style="align-self: right;" class="title">
                 <span class="rank">{{ index }}.</span>
             </td>
-                <span v-on:click="unvotePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
-                <span style="color: #ff6600;">*</span>
+                <span v-on:click="unvotePost(post)"><img style="transform: scaleY(-1);" src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
                 <img src="s.gif" width="1" height="1">
             <td class="title">
                 <a v-if="post.typePost == 'ask'" :href="'/posts/'+post.id">{{ post.title }}</a>

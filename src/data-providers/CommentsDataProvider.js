@@ -37,6 +37,21 @@ export const CommentsDataProvider = (type, params, urlAPI) => {
           });
       }
 
+      case "NEW_COMMENT":
+        uri = urlAPI + "/comments";
+        options = {
+          method: "POST",
+          url: uri,
+          data: params,
+        };
+        return axios(options)
+          .then((res) => {
+            return res.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
 
       case "GET_VOTED_COMMENTS":
         uri = urlAPI + "/comments/upvoted";

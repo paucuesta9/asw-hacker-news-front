@@ -41,8 +41,8 @@ export default {
                    parent_id: this.$route.params.id,
                    parent_type: "Reply",
                 }
-                DataProvider("REPLIES", "NEW_REPLY", newPost).then(() => {
-                   this.$router.push({ name: "Home"})
+                DataProvider("REPLIES", "NEW_REPLY", newReply).then(() => {
+                   this.$router.push("/posts/"+this.post.id)
                 }).catch((error) => {
                    this.error = error;
                 });
