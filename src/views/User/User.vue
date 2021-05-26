@@ -20,7 +20,7 @@ export default {
             this.user = newUser;
             this.about = newUser.about;
         },
-        userData: function(e){
+        aboutCheck: function(e){
             e.preventDefault();
             if(this.about != "") {
                 DataProvider("USERS", "PUT_USER", {about:this.about})

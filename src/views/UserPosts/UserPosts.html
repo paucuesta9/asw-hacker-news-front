@@ -34,7 +34,7 @@
           <span class="score" :id="'score_'+post.id"
             >{{ post.points }} Point<span v-if="post.points != 1">s</span></span
           >
-          by <a :href="'/user/'+post.user_id">{{ post.user_username }}</a>
+          by <a :href="'/users/'+post.user_id">{{ post.user_username }}</a>
           <span style="margin-right: 0.2rem;"></span>
           <span class="age">{{ post.time_elapsed }}</span>
           <span :id="'unv_'+post.id"></span> |

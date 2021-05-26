@@ -1,19 +1,14 @@
 <table style="border: 0;" cellpadding="0" class="itemlist">
     <tbody>
       <div v-for="(post, index) in this.posts">
-        <div v-if="post.voted == true">
+        <div v-if="post.voted == true && userN.id == post.user_id">
             <tr class="athing" :id="post.id">
             <td style="align-self: right;" class="title">
                 <span class="rank">{{ index }}.</span>
             </td>
-            <td class="votelinks" v-if="post.voted == true">
                 <span v-on:click="unvotePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
                 <span style="color: #ff6600;">*</span>
                 <img src="s.gif" width="1" height="1">
-            </td>
-            <td class="votelinks" v-if="post.voted != true">
-                <span v-on:click="votePost(post)"><img src="@/assets/images/grayarrow.gif" width="10" height="10"></span>
-            </td>
             <td class="title">
                 <a v-if="post.typePost == 'ask'" :href="'/posts/'+post.id">{{ post.title }}</a>
                 <a v-if="post.typePost != 'ask'" :href="post.url">{{ post.title }}<span class="sitebit comhead"> (<span class="sitestr">{{ post.url }}</span>)</span></a>

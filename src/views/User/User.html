@@ -1,8 +1,8 @@
 <div>
-    <form @submit="userData">
+    <form @submit="aboutCheck">
         <div class="labels">
             <label class="formLabel" for="User">user: </label>
-            {{user.id}}
+            {{user.username}}
         </div>
         <div class="labels" v-if="loggedUser.id == user.id">
             <label class="formLabel" for="ApiKey">Api Key: </label>
@@ -16,11 +16,11 @@
             <label style= "margin-right: 0rem;" class="formLabel"> about: </label>
             <textarea v-if="loggedUser.id == user.id" v-model="about" id="about" name="about"></textarea>
             <div v-if="loggedUser.id != user.id"> {{user.about}}</div>
-            <label style="align-self: flex-end;" class="formLabel"> help </label> <br>
+            <label style="align-self: flex-end;" class="formLabel" v-if="loggedUser.id == user.id"> help </label> <br>
         </div>
         <div class = "links">
-            <div><a :href="'/users/'+user.id"><u>submissions</u></a> </div>
-            <div><a :href="'/users/'+user.id"><u>comments</u></a> </div>
+            <div><a :href="'/posts_user/'+user.id"><u>submissions</u></a> </div>
+            <div><a :href="'/threads/'"><u>comments</u></a> </div>
             <div v-if="loggedUser.id == user.id"><a :href="'/uposts/'+user.id"><u>upvoted submissions</u></a> </div>
             <div v-if="loggedUser.id == user.id"><a :href="'/users/'+user.id"><u>upvoted comments</u></a> </div>
         </div>
@@ -32,7 +32,3 @@
         </div>
     </form>
 </div>
-
-<!-- Comment
-make buttons have less spacing
--->
