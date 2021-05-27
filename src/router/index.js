@@ -51,7 +51,7 @@ const routes = [
     component: Comment,
   },
   {
-    path: "/users",
+    path: "/users/:id",
     name: "User",
     component: User,
   },
@@ -74,11 +74,6 @@ const routes = [
     path: "/posts_user/:id",
     name: "Posts",
     component: UserPosts,
-  },
-  {
-    path: "/users/:id",
-    name: "User_id",
-    component: User,
   },
   {
     path: "/comments/user/:id",
