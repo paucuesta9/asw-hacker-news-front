@@ -9,6 +9,7 @@ Notion (Tasks): https://www.notion.so/ASW-Task-Generation-Meeting-ca8d4e4896e445
 - Project name: Hacker News
 - Subject: Arquitectura i Serveis Webs (ASW)
 - University: Facultat d'Informàtica de Barcelona (FIB- UPC)
+- Final mark: 10/10
 - Course: 2020/21 Q2
 - Group members:
 
